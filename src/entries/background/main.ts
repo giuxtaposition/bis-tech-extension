@@ -7,15 +7,18 @@ browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
 
-browser.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
     tab.title?.toLowerCase().includes("vitesicure")
   ) {
-    sendMessage(
-      "load-path-box",
-      {},
-      { context: "content-script", tabId: tabId },
-    );
+    const savedOptions = await optionsStorage.getAll();
+    if (savedOptions.showPathBox) {
+      sendMessage(
+        "load-path-box",
+        {},
+        { context: "content-script", tabId: tabId },
+      );
+    }
   }
 });

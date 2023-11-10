@@ -1,20 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import optionsStorage from "~/entries/background/optionsStorage";
-
   const currentPath = window.location.pathname.split("/")[1];
-
-  let showPathBox: boolean;
-
-  onMount(async () => {
-    const savedOptions = await optionsStorage.getAll();
-    if (savedOptions) {
-      showPathBox = savedOptions.showPathBox as boolean;
-    }
-  });
 </script>
 
-{#if currentPath && showPathBox}
+{#if currentPath}
   <div id="path-box" class={currentPath}>
     {currentPath}
   </div>
