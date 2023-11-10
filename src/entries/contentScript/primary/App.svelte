@@ -1,31 +1,32 @@
 <script lang="ts">
-  import logo from "~/assets/logo.ico";
-
-  const logoImageUrl = new URL(logo, import.meta.url).href;
+const currentPath = window.location.pathname.split("/")[1];
 </script>
 
-<div class="logo">
-  <img src={logoImageUrl} height="50" alt="" />
-</div>
+  <div
+    id="path-box"
+    class={currentPath}
+  >
+    { currentPath }
+  </div>
 
 <style>
-  .logo {
-    z-index: 99999;
-    position: fixed;
-    bottom: 20px;
-    right: 10px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 4px solid #c72a21;
-    border-radius: 50%;
-    background-color: #fff;
+  #path-box {
+    margin: 0 20px;
+    padding: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 8px;
   }
-
-  img {
-    position: absolute;
-    top: 7px;
+  .vita{
+    color: rgb(185 28 28);
+    background: rgb(252 165 165);
+  }
+  .caso-morte{
+    color: rgb(21 128 61);
+    background: rgb(134 239 172);
+  }
+  .infortuni{
+    color: rgb(29 78 216);
+    background: rgb(147 197 253);
   }
 </style>

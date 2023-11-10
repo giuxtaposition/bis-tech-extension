@@ -4,7 +4,11 @@ const sharedManifest: Partial<chrome.runtime.ManifestBase> = {
   content_scripts: [
     {
       js: ["src/entries/contentScript/primary/main.ts"],
-      matches: ["*://*/*"],
+      matches: [
+        "http://localhost:3000/*",
+        "https://calc-dev.vitesicure.it/*",
+        "https://calc-staging.vitesicure.it/*",
+      ],
     },
   ],
   icons: {
@@ -18,7 +22,7 @@ const sharedManifest: Partial<chrome.runtime.ManifestBase> = {
     page: "src/entries/options/index.html",
     open_in_tab: true,
   },
-  permissions: [],
+  permissions: ["tabs", "storage", "activeTab", "webNavigation", "scripting"],
 };
 
 const browserAction = {

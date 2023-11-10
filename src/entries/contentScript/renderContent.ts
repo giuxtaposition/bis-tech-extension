@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 
 export default async function renderContent(
   cssPaths: string[],
-  render: (appRoot: HTMLElement) => void
+  render: (appRoot: HTMLElement) => void,
 ) {
   const appContainer = document.createElement("div");
   const shadowRoot = appContainer.attachShadow({
@@ -26,7 +26,40 @@ export default async function renderContent(
   }
 
   shadowRoot.appendChild(appRoot);
-  document.body.appendChild(appContainer);
 
   render(appRoot);
+
+  Promise.any([
+    waitForElement("#vite-sicure-logo"),
+    waitForElement('img[alt="vite-sicure-logo"]'),
+  ]).then((viteSicureLogo) => {
+    let header: HTMLElement;
+    if (viteSicureLogo!.tagName === "IMG") {
+      header = viteSicureLogo!.parentElement!;
+    } else {
+      header = viteSicureLogo!.parentElement!.parentElement!;
+    }
+
+    header.appendChild(appContainer);
+  });
+}
+
+function waitForElement(selector: string): Promise<Element | null> {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+
+    const observer = new MutationObserver((_) => {
+      if (document.querySelector(selector)) {
+        observer.disconnect();
+        resolve(document.querySelector(selector));
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
 }
