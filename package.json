@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "webext-bridge": "^6.0.1",
+    "webext-options-sync": "^4.2.1",
     "webextension-polyfill": "^0.10.0"
   },
   "type": "module"

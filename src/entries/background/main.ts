@@ -1,5 +1,7 @@
 import browser from "webextension-polyfill";
 import { sendMessage } from "webext-bridge/background";
+// eslint-disable-next-line import/no-unassigned-import
+import optionsStorage from "./optionsStorage";
 
 browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
