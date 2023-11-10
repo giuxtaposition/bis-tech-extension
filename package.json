@@ -6,8 +6,10 @@
   "description": "A web extension to make life easier for bis-tech team",
   "scripts": {
     "build": "vite build",
+    "build-firefox": "EXTENSION=firefox vite build",
     "watch": "vite build --watch --mode development --minify false",
     "dev": "vite",
+    "dev-firefox": "EXTENSION=firefox vite",
     "serve:firefox": "web-ext run --start-url \"about:debugging#/runtime/this-firefox\"  --source-dir ./dist/",
     "serve:chrome": "web-ext run -t chromium --start-url \"https://calc-dev.vitesicure.it\" --source-dir ./dist/",
     "check": "svelte-check --tsconfig ./tsconfig.json"
@@ -18,7 +20,10 @@
     "@sveltejs/vite-plugin-svelte": "^2.1.1",
     "@tsconfig/svelte": "^4.0.1",
     "@types/chrome": "^0.0.228",
+    "@types/node": "^20.9.0",
     "@types/webextension-polyfill": "^0.10.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.1.0",
     "svelte": "^3.58.0",
     "svelte-check": "^3.2.0",
     "svelte-preprocess": "^5.0.3",

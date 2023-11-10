@@ -1,4 +1,5 @@
 import pkg from "../package.json";
+const isFirefox = process.env.EXTENSION === "firefox";
 
 const sharedManifest: Partial<chrome.runtime.ManifestBase> = {
   content_scripts: [
@@ -50,9 +51,13 @@ const ManifestV2 = {
 const ManifestV3 = {
   ...sharedManifest,
   action: browserAction,
-  background: {
-    service_worker: "src/entries/background/serviceWorker.ts",
-  },
+  background: isFirefox
+    ? {
+        scripts: ["src/entries/background/serviceWorker.ts"],
+      }
+    : {
+        service_worker: "src/entries/background/serviceWorker.ts",
+      },
   host_permissions: ["*://*/*"],
 };
 
