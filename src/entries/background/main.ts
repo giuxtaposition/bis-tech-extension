@@ -7,11 +7,17 @@ browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
 
+function saveVitesicureTabId(tabId: number) {
+  optionsStorage.set({ vitesicureTabId: tabId });
+}
+
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
     tab.title?.toLowerCase().includes("vitesicure")
   ) {
+    saveVitesicureTabId(tabId);
+
     const savedOptions = await optionsStorage.getAll();
     if (savedOptions.showPathBox) {
       sendMessage(

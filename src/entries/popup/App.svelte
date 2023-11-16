@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import optionsStorage from "~/entries/background/optionsStorage";
   import Switch from "~/lib/components/Switch.svelte";
+  import { PathBox } from "~/lib/utils/pathBox";
 
   let showPathBox = true;
 
@@ -13,7 +14,8 @@
   });
 
   $: saveShowPathBox = async function () {
-    await optionsStorage.set({ showPathBox: showPathBox });
+    await PathBox.saveShowPathBox(showPathBox);
+    await PathBox.sendMessageFromPopup(showPathBox);
   };
 </script>
 

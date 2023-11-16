@@ -10,3 +10,7 @@ onMessage("load-path-box", ({}) => {
     });
   });
 });
+
+onMessage("remove-path-box", ({}) => {
+  document.getElementById("vitesicure-path-box")?.remove();
+});
