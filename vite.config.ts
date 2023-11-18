@@ -11,9 +11,11 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       svelte(),
-      webExtension({
-        manifest: getManifest(Number(env.MANIFEST_VERSION)),
-      }),
+      process.env.ENVIRONMENT === "storybook"
+        ? null
+        : webExtension({
+            manifest: getManifest(Number(env.MANIFEST_VERSION)),
+          }),
     ],
     resolve: {
       alias: {
