@@ -1,7 +1,6 @@
 import browser from "webextension-polyfill";
 
-export default async function renderContent(
-  cssPaths: string[],
+export default async function prepareComponent(
   render: (appRoot: HTMLElement) => void,
 ) {
   const appContainer = document.createElement("div");
@@ -18,7 +17,7 @@ export default async function renderContent(
 
     await addViteStyleTarget(shadowRoot);
   } else {
-    cssPaths.forEach((cssPath: string) => {
+    import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS.forEach((cssPath: string) => {
       const styleEl = document.createElement("link");
       styleEl.setAttribute("rel", "stylesheet");
       styleEl.setAttribute("href", browser.runtime.getURL(cssPath));
@@ -30,37 +29,5 @@ export default async function renderContent(
 
   render(appRoot);
 
-  Promise.any([
-    waitForElement("#vite-sicure-logo"),
-    waitForElement('img[alt="vite-sicure-logo"]'),
-  ]).then((viteSicureLogo) => {
-    let header: HTMLElement;
-    if (viteSicureLogo!.tagName === "IMG") {
-      header = viteSicureLogo!.parentElement!;
-    } else {
-      header = viteSicureLogo!.parentElement!.parentElement!;
-    }
-
-    header.appendChild(appContainer);
-  });
-}
-
-function waitForElement(selector: string): Promise<Element | null> {
-  return new Promise((resolve) => {
-    if (document.querySelector(selector)) {
-      return resolve(document.querySelector(selector));
-    }
-
-    const observer = new MutationObserver((_) => {
-      if (document.querySelector(selector)) {
-        observer.disconnect();
-        resolve(document.querySelector(selector));
-      }
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-  });
+  return appContainer;
 }
