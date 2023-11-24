@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import optionsStorage from "~/entries/background/optionsStorage";
+  import Button from "~/lib/components/Button.svelte";
   import Switch from "~/lib/components/Switch.svelte";
   import { PathBox } from "~/lib/utils/pathBox";
+  import Messenger, { Location } from "~/lib/utils/messenger";
 
   let showPathBox = true;
 
@@ -17,6 +19,11 @@
     await PathBox.saveShowPathBox(showPathBox);
     await PathBox.sendMessageFromPopup(showPathBox);
   };
+
+  const autofill = async () => {
+    console.log("autofill");
+    await Messenger.send(Location.Popup, Location.ContentScript, "auto-fill");
+  };
 </script>
 
 <main>
@@ -25,6 +32,7 @@
     label="Show path box"
     onChange={saveShowPathBox}
   />
+  <Button label="Autofill page" onClick={autofill} />
 </main>
 
 <style>
@@ -35,5 +43,6 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
 </style>

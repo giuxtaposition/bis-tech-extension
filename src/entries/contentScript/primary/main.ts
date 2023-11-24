@@ -3,6 +3,7 @@ import PathBoxComponent from "../../../lib/components/PathBox.svelte";
 
 import { onMessage } from "webext-bridge/content-script";
 import { waitForElement } from "../../../lib/utils/waitForElement";
+import AutoFillService from "../../../lib/services/autoFillService";
 
 onMessage("load-path-box", async ({}) => {
   const pathBox = await prepareComponent((appRoot) => {
@@ -26,6 +27,14 @@ onMessage("load-path-box", async ({}) => {
     }
     header.appendChild(pathBox);
   });
+});
+
+onMessage("auto-fill", ({}) => {
+  const [_, product, isPreventivatorePage, isOtherPage] =
+    window.location.pathname.split("/");
+
+  const page = isOtherPage ? isOtherPage : isPreventivatorePage;
+  AutoFillService.autofill(product, page);
 });
 
 onMessage("remove-path-box", ({}) => {
