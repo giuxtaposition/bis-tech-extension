@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import optionsStorage from "~/entries/background/optionsStorage";
+  // import optionsStorage from "~/entries/background/optionsStorage";
   import Button from "~/lib/components/Button.svelte";
   import Switch from "~/lib/components/Switch.svelte";
   import { PathBox } from "~/lib/utils/pathBox";
@@ -8,15 +8,15 @@
 
   let showPathBox = true;
 
-  onMount(async () => {
-    const savedOptions = await optionsStorage.getAll();
-    if (savedOptions) {
-      showPathBox = savedOptions.showPathBox as boolean;
-    }
-  });
+  // onMount(async () => {
+  //   const savedOptions = await optionsStorage.getAll();
+  //   if (savedOptions) {
+  //     showPathBox = savedOptions.showPathBox as boolean;
+  //   }
+  // });
 
   $: saveShowPathBox = async function () {
-    await PathBox.saveShowPathBox(showPathBox);
+    // await PathBox.saveShowPathBox(showPathBox);
     await PathBox.sendMessageFromPopup(showPathBox);
   };
 

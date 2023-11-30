@@ -26,8 +26,15 @@ class AutoFillService {
         case EventType.ClickWithXpath:
           this.clickWithXpath(key);
           break;
+        case EventType.ClickNthChild:
+          this.clickNthChild(key, field.child);
+          break;
       }
     });
+  }
+
+  private static clickNthChild(selector: string, child: number) {
+    document.querySelectorAll(selector)[child];
   }
 
   private static clickWithXpath(xpath: string) {
@@ -38,13 +45,14 @@ class AutoFillService {
       XPathResult.FIRST_ORDERED_NODE_TYPE,
       null,
     ).singleNodeValue as HTMLElement;
+    console.log("xpath", element);
 
-    element.click();
+    this.simulateMouseClick(element);
   }
 
   private static clickMultiples(selector: string) {
     const buttons = document.querySelectorAll<HTMLButtonElement>(selector);
-    buttons.forEach((button) => button.click());
+    buttons.forEach((button) => this.simulateMouseClick(button));
   }
 
   private static changeInputValue(inputSelector: string, value: string) {
@@ -61,7 +69,22 @@ class AutoFillService {
 
   private static clickInputElement(inputSelector: string) {
     const input = this.getInput(inputSelector);
-    input.click();
+
+    this.simulateMouseClick(input);
+  }
+
+  private static simulateMouseClick(element: HTMLElement) {
+    const mouseClickEvents = ["mousedown", "click", "mouseup"];
+    mouseClickEvents.forEach((mouseEventType) =>
+      element.dispatchEvent(
+        new MouseEvent(mouseEventType, {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+          buttons: 1,
+        }),
+      ),
+    );
   }
 
   private static getInput(inputSelector: string): HTMLInputElement {
