@@ -65,6 +65,9 @@ class AutoFillService {
 
     const inputEvent = new Event("input", { bubbles: true });
     input.dispatchEvent(inputEvent);
+
+    const blurEvent = new Event("blur", { bubbles: true });
+    input.dispatchEvent(blurEvent);
   }
 
   private static clickInputElement(inputSelector: string) {
