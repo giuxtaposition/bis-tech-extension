@@ -83,6 +83,9 @@ const autofillData: AutoFillData = {
         value: "MALE",
         event: EventType.Change,
       },
+      '//input[@name="customerInfo.fiscalCode"]/..//button': {
+        event: EventType.ClickWithXpath,
+      },
       "input[name='customerInfo.job']": {
         value: "HOTELIER",
         event: EventType.Change,
@@ -256,6 +259,9 @@ const autofillData: AutoFillData = {
       "input[name='gender']": {
         value: "MALE",
         event: EventType.Change,
+      },
+      '//input[@name="fiscalCode"]/..//button': {
+        event: EventType.ClickWithXpath,
       },
       "input[name='profession']": {
         value: "LIVESTOCK_BREEDER",
