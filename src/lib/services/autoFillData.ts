@@ -6,6 +6,15 @@ export enum EventType {
   ClickNthChild = "ClickNthChild",
 }
 
+enum Page {
+  Calculator = "preventivatore",
+  YourOffer = "la-tua-offerta",
+  HealthStatus = "stato-di-salute",
+  Beneficiaries = "beneficiari",
+  PersonalData = "dati-personali",
+  Checkout = "checkout",
+}
+
 interface AutoFillData {
   [key: string]: {
     [key: string]: {
@@ -21,7 +30,7 @@ interface AutoFillData {
 
 const autofillData: AutoFillData = {
   "caso-morte": {
-    preventivatore: {
+    [Page.Calculator]: {
       "input[name='customerInfo.birthDate']": {
         value: "26/03/1997",
         event: EventType.Change,
@@ -33,7 +42,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "la-tua-offerta": {
+    [Page.YourOffer]: {
       "input[name='customerInfo.firstName']": {
         value: "Estensione",
         event: EventType.Change,
@@ -54,7 +63,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "stato-di-salute": {
+    [Page.HealthStatus]: {
       '//*[text()[contains(.,"Ai sensi della vigente normativa sulla Privacy,")]]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
@@ -63,7 +72,7 @@ const autofillData: AutoFillData = {
         event: EventType.ClickMultiples,
       },
     },
-    beneficiari: {
+    [Page.Beneficiaries]: {
       "input[name='beneficiaries.type']": {
         value: "LEGITIMATE_AND_TESTAMENTARY_HEIRS",
         event: EventType.Change,
@@ -75,7 +84,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "dati-personali": {
+    [Page.PersonalData]: {
       'input[name="customerInfo.gender"]': {
         value: "MALE",
         event: EventType.Change,
@@ -145,7 +154,7 @@ const autofillData: AutoFillData = {
         withDelay: true,
       },
     },
-    checkout: {
+    [Page.Checkout]: {
       "input[name='customerInfo.document.type']": {
         value: "PASSPORT",
         event: EventType.Change,
@@ -217,7 +226,7 @@ const autofillData: AutoFillData = {
     },
   },
   vita: {
-    preventivatore: {
+    [Page.Calculator]: {
       "input[name='birthDate']": {
         value: "26/03/1997",
         event: EventType.Change,
@@ -229,7 +238,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "la-tua-offerta": {
+    [Page.YourOffer]: {
       "input[name='contacts.name']": {
         value: "Estensione",
         event: EventType.Change,
@@ -250,7 +259,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "stato-di-salute": {
+    [Page.HealthStatus]: {
       'input[name="height"]': {
         event: EventType.Change,
         value: "170",
@@ -266,7 +275,7 @@ const autofillData: AutoFillData = {
         event: EventType.ClickMultiples,
       },
     },
-    beneficiari: {
+    [Page.Beneficiaries]: {
       "input[name='beneficiariesType']": {
         value: "legitimateAndTestamentaryHeirs",
         event: EventType.Change,
@@ -278,7 +287,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    "dati-personali": {
+    [Page.PersonalData]: {
       "input[name='cityOfBirth']": {
         value: "Rimini",
         event: EventType.Change,
@@ -335,7 +344,7 @@ const autofillData: AutoFillData = {
         event: EventType.Change,
       },
     },
-    checkout: {
+    [Page.Checkout]: {
       "input[name='insured.document.type']": {
         value: "passport",
         event: EventType.Change,

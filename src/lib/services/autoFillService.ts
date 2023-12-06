@@ -1,10 +1,12 @@
 import autofillData, { EventType } from "./autoFillData";
 
 class AutoFillService {
-  public static async autofill(product: string, page: string) {
+  public static async autofill(
+    product: string,
+    page: string,
+    goToNextPage?: boolean,
+  ) {
     const toAutoFill = autofillData[product][page];
-
-    console.log("toAutoFill", toAutoFill);
 
     if (!toAutoFill) {
       console.warn("No autofill data found");
@@ -21,6 +23,10 @@ class AutoFillService {
         field.child,
         field.withDelay,
       );
+    }
+
+    if (goToNextPage) {
+      this.goToNextPage();
     }
   }
 
@@ -57,6 +63,12 @@ class AutoFillService {
     if (withDelay) {
       await timer(200);
     }
+  }
+
+  private static goToNextPage() {
+    const allButtons = document.querySelectorAll<HTMLButtonElement>("button");
+    const lastButton = allButtons[allButtons.length - 1];
+    this.simulateMouseClick(lastButton);
   }
 
   private static clickNthChild(selector: string, child: number) {

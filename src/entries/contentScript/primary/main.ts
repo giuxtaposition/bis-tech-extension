@@ -29,13 +29,14 @@ onMessage("load-path-box", async ({}) => {
   });
 });
 
-onMessage("auto-fill", ({}) => {
+onMessage("auto-fill", ({ data }) => {
+  const { goToNextPage } = data;
   const [_, product, isPreventivatorePage, isOtherPage] =
     window.location.pathname.split("/");
 
   const page = isOtherPage ? isOtherPage : isPreventivatorePage;
   console.log("should autofille");
-  AutoFillService.autofill(product, page);
+  AutoFillService.autofill(product, page, goToNextPage);
 });
 
 onMessage("remove-path-box", ({}) => {
