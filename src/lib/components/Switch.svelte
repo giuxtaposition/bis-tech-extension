@@ -9,14 +9,21 @@
     <input type="checkbox" bind:checked on:change={onChange} />
     <span class="slider" />
   </label>
-  {label}
+  <p>
+    {label}
+  </p>
 </div>
 
 <style>
+  p {
+    color: #3b3b3b;
+    font-size: 16px;
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+  }
+
   div {
     display: flex;
     font-size: 16px;
-    gap: 1rem;
     align-items: center;
   }
 
@@ -24,7 +31,6 @@
     position: relative;
     display: inline-block;
     width: 50px;
-    height: 24px;
   }
 
   .switch input {
@@ -40,36 +46,39 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #bababa;
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 34px;
+    width: 34px;
+    height: 14px;
   }
 
   .slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    height: 20px;
+    width: 20px;
+    left: -4px;
+    bottom: -2px;
+    background-color: #6e6e6e;
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
   }
 
   input:checked + .slider {
-    background-color: #2196f3;
+    background-color: #ff80a9;
   }
 
   input:checked + .slider {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px #ff80a9;
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    background-color: #e7004c;
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
   }
 </style>
