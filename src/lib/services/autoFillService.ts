@@ -14,21 +14,25 @@ class AutoFillService {
     Object.keys(toAutoFill).forEach((key) => {
       const field = toAutoFill[key];
 
-      switch (field.event) {
-        case EventType.Change:
-          this.changeInputValue(key, field.value);
-          break;
-        case EventType.Click:
-          this.clickInputElement(key);
-          break;
-        case EventType.ClickMultiples:
-          this.clickMultiples(key);
-        case EventType.ClickWithXpath:
-          this.clickWithXpath(key);
-          break;
-        case EventType.ClickNthChild:
-          this.clickNthChild(key, field.child);
-          break;
+      try {
+        switch (field.event) {
+          case EventType.Change:
+            this.changeInputValue(key, field.value);
+            break;
+          case EventType.Click:
+            this.clickInputElement(key);
+            break;
+          case EventType.ClickMultiples:
+            this.clickMultiples(key);
+          case EventType.ClickWithXpath:
+            this.clickWithXpath(key);
+            break;
+          case EventType.ClickNthChild:
+            this.clickNthChild(key, field.child);
+            break;
+        }
+      } catch (error) {
+        console.error(`could not fill with ${key}`, error);
       }
     });
   }
