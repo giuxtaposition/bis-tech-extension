@@ -53,5 +53,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    width: 300px;
   }
 </style>
