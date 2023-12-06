@@ -12,6 +12,7 @@ interface AutoFillData {
       [key: string]: {
         value?: string;
         child?: number;
+        withDelay?: boolean;
         event: EventType;
       };
     };
@@ -75,117 +76,143 @@ const autofillData: AutoFillData = {
       },
     },
     "dati-personali": {
-      "input[name='customerInfo.birthCity']": {
-        value: "Rimini",
-        event: EventType.Change,
-      },
-      "input[name='customerInfo.gender']": {
+      'input[name="customerInfo.gender"]': {
         value: "MALE",
         event: EventType.Change,
       },
+      "input[name='customerInfo.birthCity']": {
+        value: "Rimini",
+        event: EventType.Change,
+        withDelay: true,
+      },
       '//input[@name="customerInfo.fiscalCode"]/..//button': {
         event: EventType.ClickWithXpath,
+        withDelay: true,
       },
       "input[name='customerInfo.job']": {
         value: "HOTELIER",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.maritalStatus']": {
         value: "SINGLE",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.familyUnitType']": {
         value: "SINGLE",
         event: EventType.Change,
+        withDelay: true,
       },
       "//*[text()='Sei una persona politicamente esposta e/o ricopri incarichi amministrativi pubblici importanti anche se non politici?']/../../..//button[2]":
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       "//*[text()='Confermi di voler ricevere tutte le informazioni via email?']/../../..//button[2]":
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       "input[name='street']": {
         value: "Albero",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='streetNumber']": {
         value: "89",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='postalCode']": {
         value: "47923",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='city']": {
         value: "RIMINI",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='province']": {
         value: "RN",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='state']": {
         value: "ITALIA",
         event: EventType.Change,
+        withDelay: true,
       },
     },
     checkout: {
       "input[name='customerInfo.document.type']": {
-        value: "DRIVING_LICENSE",
+        value: "PASSPORT",
         event: EventType.Change,
       },
       "input[name='customerInfo.document.code']": {
         value: "ASD123",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.document.releaseDate']": {
         value: "30/03/2015",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.document.expireDate']": {
         value: "30/03/2035",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.document.releasePlace']": {
         value: "Roma",
         event: EventType.Change,
+        withDelay: true,
       },
       "input[name='customerInfo.document.releaseAuthority']": {
         value: "PREFECTURE",
         event: EventType.Change,
+        withDelay: true,
       },
       '//*[text()[contains(.,"Rispondendo solo alle domande")]]/../../..//button[2]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       "input[name='payment.ibanCode']": {
         value: "IT80U0300203280965832926428",
         event: EventType.Change,
+        withDelay: true,
       },
       '//*[text()="Confermi di essere l\'intestatario del conto?"]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       '//*[text()="Acquistando la polizza dichiaro che tutte le informazioni inserite sono vere ed esatte e mi impegno a comunicare ogni variazione od integrazione delle stesse nel rispetto di quanto previsto dalla Legge sulle dichiarazioni rese in fase contrattuale."]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       '//*[text()[contains(.,"Dichiaro di aver")]]/../../..//button[1]': {
         event: EventType.ClickWithXpath,
+        withDelay: true,
       },
       '//*[text()[contains(.,"Autorizzo il trattamento dei miei dati personali per l\'invio di comunicazioni")]]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       '//*[text()[contains(.,"Possiedi altre polizze come quelle che ci hai chiesto?")]]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
       '//*[text()[contains(.,"Confermi che la Polizza deve soddisfare obblighi contrattuali (es. richiesto dalla banca)")]]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
+          withDelay: true,
         },
     },
   },

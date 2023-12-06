@@ -1,7 +1,7 @@
 import autofillData, { EventType } from "./autoFillData";
 
 class AutoFillService {
-  public static autofill(product: string, page: string) {
+  public static async autofill(product: string, page: string) {
     const toAutoFill = autofillData[product][page];
 
     console.log("toAutoFill", toAutoFill);
@@ -11,30 +11,52 @@ class AutoFillService {
       return;
     }
 
-    Object.keys(toAutoFill).forEach((key) => {
+    for (const key of Object.keys(toAutoFill)) {
       const field = toAutoFill[key];
 
-      try {
-        switch (field.event) {
-          case EventType.Change:
-            this.changeInputValue(key, field.value);
-            break;
-          case EventType.Click:
-            this.clickInputElement(key);
-            break;
-          case EventType.ClickMultiples:
-            this.clickMultiples(key);
-          case EventType.ClickWithXpath:
-            this.clickWithXpath(key);
-            break;
-          case EventType.ClickNthChild:
-            this.clickNthChild(key, field.child);
-            break;
-        }
-      } catch (error) {
-        console.error(`could not fill with ${key}`, error);
+      await AutoFillService.executeEvent(
+        field.event,
+        key,
+        field.value,
+        field.child,
+        field.withDelay,
+      );
+    }
+  }
+
+  private static async executeEvent(
+    event: EventType,
+    key: string,
+    value?: string,
+    child?: number,
+    withDelay = false,
+  ) {
+    const timer = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+    try {
+      switch (event) {
+        case EventType.Change:
+          this.changeInputValue(key, value);
+          break;
+        case EventType.Click:
+          this.clickInputElement(key);
+          break;
+        case EventType.ClickMultiples:
+          this.clickMultiples(key);
+        case EventType.ClickWithXpath:
+          this.clickWithXpath(key);
+          break;
+        case EventType.ClickNthChild:
+          this.clickNthChild(key, child);
+          break;
       }
-    });
+    } catch (error) {
+      console.error(`could not fill with ${key}`, error);
+    }
+
+    if (withDelay) {
+      await timer(200);
+    }
   }
 
   private static clickNthChild(selector: string, child: number) {
