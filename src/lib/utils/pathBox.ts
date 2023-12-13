@@ -4,24 +4,29 @@ import optionsStorage from "../../entries/background/optionsStorage";
 export class PathBox {
   public static async sendMessageFromPopup(showPathBox: boolean) {
     const savedOptions = await optionsStorage.getAll();
-    if (!showPathBox) {
-      sendMessage(
-        "remove-path-box",
-        {},
-        {
-          context: "content-script",
-          tabId: savedOptions.vitesicureTabId as number,
-        },
-      );
-    } else {
-      sendMessage(
-        "load-path-box",
-        {},
-        {
-          context: "content-script",
-          tabId: savedOptions.vitesicureTabId as number,
-        },
-      );
+    const tabIds: string[] = JSON.parse(
+      savedOptions.vitesicureTabIds as string,
+    );
+    for (const tabId of tabIds) {
+      if (!showPathBox) {
+        sendMessage(
+          "remove-path-box",
+          {},
+          {
+            context: "content-script",
+            tabId: parseInt(tabId),
+          },
+        );
+      } else {
+        sendMessage(
+          "load-path-box",
+          {},
+          {
+            context: "content-script",
+            tabId: parseInt(tabId),
+          },
+        );
+      }
     }
   }
 

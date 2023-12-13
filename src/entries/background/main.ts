@@ -1,24 +1,27 @@
 import browser from "webextension-polyfill";
 import { sendMessage } from "webext-bridge/background";
-// eslint-disable-next-line import/no-unassigned-import
 import optionsStorage from "./optionsStorage";
 
 browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
 
-function saveVitesicureTabId(tabId: number) {
-  optionsStorage.set({ vitesicureTabId: tabId });
-}
-
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
     tab.title?.toLowerCase().includes("vitesicure")
   ) {
-    saveVitesicureTabId(tabId);
-
     const savedOptions = await optionsStorage.getAll();
+    const tabIds: string[] = savedOptions.vitesicureTabIds
+      ? JSON.parse(savedOptions.vitesicureTabIds as string)
+      : [];
+
+    console.log("adding tab id", tabId);
+
+    optionsStorage.set({
+      vitesicureTabIds: JSON.stringify(tabIds.concat([tabId.toString()])),
+    });
+
     if (savedOptions.showPathBox) {
       sendMessage(
         "load-path-box",
@@ -26,5 +29,17 @@ browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
         { context: "content-script", tabId: tabId },
       );
     }
+  }
+});
+
+browser.tabs.onRemoved.addListener(async function (tabId, removeInfo) {
+  const savedOptions = await optionsStorage.getAll();
+  const tabs: string[] = JSON.parse(savedOptions.vitesicureTabIds as string);
+  if (tabs.includes(tabId.toString())) {
+    console.log("removing tab id", tabId);
+    tabs.splice(tabs.indexOf(tabId.toString()), 1);
+    optionsStorage.set({
+      vitesicureTabIds: JSON.stringify(tabs),
+    });
   }
 });

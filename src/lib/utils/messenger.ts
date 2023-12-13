@@ -17,28 +17,31 @@ class Messenger {
     content: any = {},
   ) {
     const savedOptions = await optionsStorage.getAll();
-    switch (from) {
-      case Location.Popup:
-        sendMessageFromPopup(message, content, {
-          context: to,
-          tabId: savedOptions.vitesicureTabId as number,
-        });
-        break;
-      case Location.ContentScript:
-        sendMessageFromContentScript(message, content, {
-          context: to,
-          tabId: savedOptions.vitesicureTabId as number,
-        });
-        break;
-      case Location.Background:
-        sendMessageFromBackground(message, content, {
-          context: to,
-          tabId: savedOptions.vitesicureTabId as number,
-        });
-        break;
+    const tabs: string[] = JSON.parse(savedOptions.vitesicureTabIds as string);
+    for (const tabId of tabs) {
+      switch (from) {
+        case Location.Popup:
+          sendMessageFromPopup(message, content, {
+            context: to,
+            tabId: tabId as number,
+          });
+          break;
+        case Location.ContentScript:
+          sendMessageFromContentScript(message, content, {
+            context: to,
+            tabId: tabId as number,
+          });
+          break;
+        case Location.Background:
+          sendMessageFromBackground(message, content, {
+            context: to,
+            tabId: tabId as number,
+          });
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
   }
 }
