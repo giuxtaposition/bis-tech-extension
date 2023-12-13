@@ -2,6 +2,9 @@
 
 Bis-Tech extension is a web extension to make life easier for vitesicure product team helping them test faster the various products offered by vitesicure.
 
+![](/.github/images/path-box.png)
+![](/.github/images/popup.png)
+
 ## Features
 
 - Visual Box to show current product.
