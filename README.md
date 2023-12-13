@@ -1,33 +1,18 @@
-# bis-tech-extension
+# 🥩 Bis-Tech Extension
 
-This template should help get you started developing a svelte web extension in Vite.
+Bis-Tech extension is a web extension to make life easier for vitesicure product team helping them test faster the various products offered by vitesicure.
 
-## Usage Notes
+## Features
 
-The extension manifest is defined in `src/manifest.js` and used by `@samrum/vite-plugin-web-extension` in the vite config.
+- Visual Box to show current product.
+- Autofill page.
+- Autofill page and continue to next page.
 
-Background, content scripts, options, and popup entry points exist in the `src/entries` directory.
+## Permissions required
 
-Content scripts are rendered by `src/entries/contentScript/renderContent.js` which renders content within a ShadowRoot
-and handles style injection for HMR and build modes.
-
-Otherwise, the project functions just like a regular Vite project.
-
-To switch between Manifest V2 and Manifest V3 builds, use the MANIFEST_VERSION environment variable defined in `.env`
-
-HMR during development in Manifest V3 requires Chromium version >= 110.0.5480.0.
-
-Refer to [@samrum/vite-plugin-web-extension](https://github.com/samrum/vite-plugin-web-extension) for more usage notes.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
+- `"http://localhost:3000/*"`, `"https://calc-dev.vitesicure.it/*"`, `"https://calc-staging.vitesicure.it/*"` - for running on the vitesicure dev environments.
+- `storage` - for storing user preferences and needed tabs info.
+- `tabs, activeTab, webNavigation and scription` - for actually doing what the extension offers.
 
 ## Commands
 
@@ -39,7 +24,8 @@ Hot Module Reloading is used to load changes inline without requiring extension 
 Currently only works in Chromium based browsers.
 
 ```sh
-npm run dev
+pnpm run dev #for chromium
+pnpm run dev-firefox #for firefox
 ```
 
 #### Development, Watch
@@ -47,7 +33,8 @@ npm run dev
 Rebuilds extension on file changes. Requires a reload of the extension (and page reload if using content scripts)
 
 ```sh
-npm run watch
+pnpm run watch #for chromium
+pnpm run watch-firefox #for firefox
 ```
 
 #### Production
@@ -55,7 +42,8 @@ npm run watch
 Minifies and optimizes extension build
 
 ```sh
-npm run build
+pnpm run build #for chromium
+pnpm run build-firefox #for firefox
 ```
 
 ### Load extension in browser
@@ -63,9 +51,9 @@ npm run build
 Loads the contents of the dist directory into the specified browser
 
 ```sh
-npm run serve:chrome
+pnpm serve:chrome
+pnpm serve:firefox
 ```
 
-```sh
-npm run serve:firefox
-```
+> [!NOTE]  
+> Right now firefox and chromium commands are separated because firefox does not support ManifestV3 completely (it still doesn't support `background.service_worker`).
