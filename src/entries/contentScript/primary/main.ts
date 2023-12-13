@@ -25,6 +25,7 @@ onMessage("load-path-box", async ({}) => {
     } else {
       header = viteSicureLogo!.parentElement!.parentElement!;
     }
+    if (header.querySelector("#vitesicure-path-box")) return;
     header.appendChild(pathBox);
   });
 });

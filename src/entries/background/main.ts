@@ -16,11 +16,11 @@ browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
       ? JSON.parse(savedOptions.vitesicureTabIds as string)
       : [];
 
-    console.log("adding tab id", tabId);
-
-    optionsStorage.set({
-      vitesicureTabIds: JSON.stringify(tabIds.concat([tabId.toString()])),
-    });
+    if (!tabIds.includes(tabId.toString())) {
+      optionsStorage.set({
+        vitesicureTabIds: JSON.stringify(tabIds.concat([tabId.toString()])),
+      });
+    }
 
     if (savedOptions.showPathBox) {
       sendMessage(
