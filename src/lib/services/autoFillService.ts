@@ -7,6 +7,7 @@ class AutoFillService {
     goToNextPage?: boolean,
   ) {
     const toAutoFill = autofillData[product][page];
+    console.log(toAutoFill);
 
     if (!toAutoFill) {
       console.warn("No autofill data found");

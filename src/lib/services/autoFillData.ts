@@ -6,11 +6,19 @@ export enum EventType {
   ClickNthChild = "ClickNthChild",
 }
 
-enum Page {
+enum LifePage {
   Calculator = "preventivatore",
   YourOffer = "la-tua-offerta",
   HealthStatus = "stato-di-salute",
   Beneficiaries = "beneficiari",
+  PersonalData = "dati-personali",
+  Checkout = "checkout",
+}
+
+enum InjuryPage {
+  Select = "seleziona",
+  YourOffer = "la-tua-polizza-infortuni",
+  Contractor = "contraente",
   PersonalData = "dati-personali",
   Checkout = "checkout",
 }
@@ -30,7 +38,7 @@ interface AutoFillData {
 
 const autofillData: AutoFillData = {
   "caso-morte": {
-    [Page.Calculator]: {
+    [LifePage.Calculator]: {
       "input[name='customerInfo.birthDate']": {
         value: "26/03/1997",
         event: EventType.Change,
@@ -42,7 +50,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    [Page.YourOffer]: {
+    [LifePage.YourOffer]: {
       "input[name='customerInfo.firstName']": {
         value: "Estensione",
         event: EventType.Change,
@@ -63,7 +71,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    [Page.HealthStatus]: {
+    [LifePage.HealthStatus]: {
       '//*[text()[contains(.,"Ai sensi della vigente normativa sulla Privacy,")]]/../../..//button[1]':
         {
           event: EventType.ClickWithXpath,
@@ -72,7 +80,7 @@ const autofillData: AutoFillData = {
         event: EventType.ClickMultiples,
       },
     },
-    [Page.Beneficiaries]: {
+    [LifePage.Beneficiaries]: {
       "input[name='beneficiaries.type']": {
         value: "LEGITIMATE_AND_TESTAMENTARY_HEIRS",
         event: EventType.Change,
@@ -84,7 +92,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    [Page.PersonalData]: {
+    [LifePage.PersonalData]: {
       'input[name="customerInfo.gender"]': {
         value: "MALE",
         event: EventType.Change,
@@ -154,7 +162,7 @@ const autofillData: AutoFillData = {
         withDelay: true,
       },
     },
-    [Page.Checkout]: {
+    [LifePage.Checkout]: {
       "input[name='customerInfo.document.type']": {
         value: "PASSPORT",
         event: EventType.Change,
@@ -226,7 +234,7 @@ const autofillData: AutoFillData = {
     },
   },
   vita: {
-    [Page.Calculator]: {
+    [LifePage.Calculator]: {
       "input[name='birthDate']": {
         value: "26/03/1997",
         event: EventType.Change,
@@ -238,7 +246,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    [Page.YourOffer]: {
+    [LifePage.YourOffer]: {
       "input[name='contacts.name']": {
         value: "Estensione",
         event: EventType.Change,
@@ -259,7 +267,7 @@ const autofillData: AutoFillData = {
         event: EventType.Click,
       },
     },
-    [Page.HealthStatus]: {
+    [LifePage.HealthStatus]: {
       'input[name="height"]': {
         event: EventType.Change,
         value: "170",
@@ -275,19 +283,19 @@ const autofillData: AutoFillData = {
         event: EventType.ClickMultiples,
       },
     },
-    [Page.Beneficiaries]: {
-      "input[name='beneficiariesType']": {
+    [LifePage.Beneficiaries]: {
+      "input[name='beneficiaries.beneficiariesType']": {
         value: "legitimateAndTestamentaryHeirs",
         event: EventType.Change,
       },
-      "input[name='capitalToBeneficiaries']": {
+      "input[name='compliance.capitalToBeneficiaries']": {
         event: EventType.Click,
       },
-      "input[name='insuranceIsNotSavings']": {
+      "input[name='compliance.insuranceIsNotSavings']": {
         event: EventType.Click,
       },
     },
-    [Page.PersonalData]: {
+    [LifePage.PersonalData]: {
       "input[name='cityOfBirth']": {
         value: "Rimini",
         event: EventType.Change,
@@ -344,7 +352,7 @@ const autofillData: AutoFillData = {
         event: EventType.Change,
       },
     },
-    [Page.Checkout]: {
+    [LifePage.Checkout]: {
       "input[name='insured.document.type']": {
         value: "passport",
         event: EventType.Change,
@@ -392,6 +400,154 @@ const autofillData: AutoFillData = {
         {
           event: EventType.ClickWithXpath,
         },
+    },
+  },
+  infortuni: {
+    [InjuryPage.YourOffer]: {
+      "input[name='data.insuredList[0].birthDate']": {
+        value: "26/03/1997",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.firstName']": {
+        value: "Estensione",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.lastName']": {
+        value: "BisTech",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.email']": {
+        value: "bis-tech@vitesicure.it",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.phoneNumber']": {
+        value: "3333333333",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='agreements.privacyPolicy']": {
+        event: EventType.Click,
+        withDelay: true,
+      },
+    },
+    [InjuryPage.Contractor]: {
+      "input[name='contractor.birthCity']": {
+        value: "Rimini",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.gender']": {
+        value: "MALE",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      '//input[@name="contractor.fiscalCode"]/..//button': {
+        event: EventType.ClickWithXpath,
+        withDelay: true,
+      },
+      "input[name='contractor.maritalStatus']": {
+        value: "SINGLE",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.familyUnitType']": {
+        value: "SINGLE",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "div[data-testid] button:nth-child(2)": {
+        event: EventType.ClickMultiples,
+      },
+      '//*[text()[contains(.,"Confermi di voler proteggere te stesso")]]/../../..//button[1]':
+        {
+          event: EventType.ClickWithXpath,
+          withDelay: true,
+        },
+      "input[name='street']": {
+        value: "Albero",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='streetNumber']": {
+        value: "89",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='postalCode']": {
+        value: "47923",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='city']": {
+        value: "RIMINI",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='province']": {
+        value: "RN",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='state']": {
+        value: "ITALIA",
+        event: EventType.Change,
+        withDelay: true,
+      },
+    },
+    [InjuryPage.Checkout]: {
+      "input[name='contractor.document.type']": {
+        value: "PASSPORT",
+        event: EventType.Change,
+      },
+      "input[name='contractor.document.code']": {
+        value: "ASD123",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.document.releaseDate']": {
+        value: "30/03/2015",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.document.expireDate']": {
+        value: "30/03/2035",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.document.releasePlace']": {
+        value: "Roma",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "input[name='contractor.document.releaseAuthority']": {
+        value: "PREFECTURE",
+        event: EventType.Change,
+        withDelay: true,
+      },
+      "div[data-testid='agreements.dataTruthfulness'] button": {
+        event: EventType.Click,
+        withDelay: true,
+      },
+      "div[data-testid='agreements.termsAndConditions'] button": {
+        event: EventType.Click,
+        withDelay: true,
+      },
+      "div[data-testid='agreements.limitationsAndExclusion'] button": {
+        event: EventType.Click,
+        withDelay: true,
+      },
+      "div[data-testid='agreements.privacyPolicyExtended'] button": {
+        event: EventType.Click,
+        withDelay: true,
+      },
+      "div[data-testid='agreements.oneYearPolicy'] button": {
+        event: EventType.Click,
+        withDelay: true,
+      },
     },
   },
 };
