@@ -18,7 +18,9 @@
     "build-storybook": "ENVIRONMENT=storybook storybook build",
     "pack:crx": "crx pack dist -o ./extension.crx",
     "pack:xpi": "WEB_EXT_ARTIFACTS_DIR=./ web-ext build --source-dir ./dist --filename extension.xpi --overwrite-dest",
-    "pack:zip": "rimraf extension.zip && jszip-cli add dist/* -o ./extension.zip"
+    "pack:zip": "rimraf extension.zip && jszip-cli add dist/* -o ./extension.zip",
+    "test": "ENVIRONMENT=test vitest",
+    "coverage": "ENVIRONMENT=test vitest run --coverage"
   },
   "license": "MIT",
   "devDependencies": {
@@ -38,6 +40,7 @@
     "@types/node": "^20.9.0",
     "@types/webextension-polyfill": "^0.10.0",
     "crx": "^5.0.1",
+    "jsdom": "^23.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-svelte": "^3.1.0",
     "react": "^18.2.0",
@@ -51,9 +54,11 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "vite": "~4.3.3",
+    "vitest": "^1.0.4",
     "web-ext": "^7.6.2"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.3.1",
     "webext-bridge": "^6.0.1",
     "webext-options-sync": "^4.2.1",
     "webextension-polyfill": "^0.10.0"

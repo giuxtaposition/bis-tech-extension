@@ -1,4 +1,4 @@
-import autofillData, { EventType } from "./autoFillData";
+import AutoFillDataService, { EventType } from "./autoFillDataService";
 
 class AutoFillService {
   public static async autofill(
@@ -6,20 +6,18 @@ class AutoFillService {
     page: string,
     goToNextPage?: boolean,
   ) {
-    const toAutoFill = autofillData[product][page];
-    console.log(toAutoFill);
+    const toAutoFill = AutoFillDataService.getAutoFillData(product, page);
 
     if (!toAutoFill) {
       console.warn("No autofill data found");
       return;
     }
 
-    for (const key of Object.keys(toAutoFill)) {
-      const field = toAutoFill[key];
-
+    for (const field of Object.values(toAutoFill)) {
+      console.log("field", field);
       await AutoFillService.executeEvent(
         field.event,
-        key,
+        field.selector,
         field.value,
         field.child,
         field.withDelay,
@@ -84,7 +82,6 @@ class AutoFillService {
       XPathResult.FIRST_ORDERED_NODE_TYPE,
       null,
     ).singleNodeValue as HTMLElement;
-    console.log("xpath", element);
 
     this.simulateMouseClick(element);
   }

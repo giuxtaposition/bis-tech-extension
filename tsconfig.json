@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
+    "types": ["vitest/globals", "chrome"],
     "allowSyntheticDefaultImports": true,
     "target": "esnext",
     "useDefineForClassFields": true,

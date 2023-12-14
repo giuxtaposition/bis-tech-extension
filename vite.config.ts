@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import webExtension from "@samrum/vite-plugin-web-extension";
@@ -12,7 +13,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       svelte(),
-      process.env.ENVIRONMENT === "storybook"
+      process.env.ENVIRONMENT === "storybook" ||
+      process.env.ENVIRONMENT === "test"
         ? null
         : webExtension({
             manifest: getManifest(Number(env.MANIFEST_VERSION)),
@@ -23,6 +25,11 @@ export default defineConfig(({ mode }) => {
       alias: {
         "~": path.resolve(__dirname, "./src"),
       },
+    },
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: "./src/tests/setup.ts",
     },
   };
 });
