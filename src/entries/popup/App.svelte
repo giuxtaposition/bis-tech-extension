@@ -1,31 +1,38 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import optionsStorage from "~/entries/background/optionsStorage";
   import Button from "~/lib/components/Button.svelte";
   import Switch from "~/lib/components/Switch.svelte";
-  import { PathBox } from "~/lib/utils/pathBox";
-  import Messenger, { Location } from "~/lib/utils/messenger";
+  import MessengerService, {
+    Location,
+  } from "~/lib/services/messenger/messengerService";
+  import WebextBridge from "~/lib/services/messenger/webextBridge";
+  import OptionsSyncStorage from "~/lib/services/storage";
+
+  const storage = OptionsSyncStorage.getInstance();
+  const messenger = new MessengerService(new WebextBridge(), storage);
 
   let showPathBox = true;
 
   onMount(async () => {
-    const savedOptions = await optionsStorage.getAll();
-    if (savedOptions) {
-      showPathBox = savedOptions.showPathBox as boolean;
-    }
+    showPathBox = await storage.get("showPathBox");
   });
 
   $: saveShowPathBox = async function () {
-    await PathBox.saveShowPathBox(showPathBox);
-    await PathBox.sendMessageFromPopup(showPathBox);
+    storage.set("showPathBox", showPathBox);
+
+    messenger.send(
+      Location.Popup,
+      Location.ContentScript,
+      showPathBox ? "load-path-box" : "remove-path-box",
+    );
   };
 
   const autofill = async () => {
-    await Messenger.send(Location.Popup, Location.ContentScript, "auto-fill");
+    await messenger.send(Location.Popup, Location.ContentScript, "auto-fill");
   };
 
   const autofillAndGoToNextPage = async () => {
-    await Messenger.send(Location.Popup, Location.ContentScript, "auto-fill", {
+    await messenger.send(Location.Popup, Location.ContentScript, "auto-fill", {
       goToNextPage: true,
     });
   };

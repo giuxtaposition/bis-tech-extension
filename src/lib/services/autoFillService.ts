@@ -93,6 +93,7 @@ class AutoFillService {
 
   private static changeInputValue(inputSelector: string, value: string) {
     const input = this.getInput(inputSelector);
+    console.log("input", input);
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
       "value",

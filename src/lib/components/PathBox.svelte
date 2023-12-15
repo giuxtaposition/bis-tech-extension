@@ -1,6 +1,7 @@
 <script lang="ts">
-  export let currentPath: "vita" | "caso-morte" | "infortuni";
-  console.log(currentPath);
+  import type { Product } from "~/types";
+
+  export let currentPath: Product;
 </script>
 
 {#if currentPath}

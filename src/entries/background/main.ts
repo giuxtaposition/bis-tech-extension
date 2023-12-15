@@ -1,45 +1,42 @@
 import browser from "webextension-polyfill";
-import { sendMessage } from "webext-bridge/background";
-import optionsStorage from "./optionsStorage";
+import OptionsSyncStorage from "../../lib/services/storage";
+import MessengerService, {
+  Location,
+} from "../../lib/services/messenger/messengerService";
+import WebextBridge from "../../lib/services/messenger/webextBridge";
 
 browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
+
+const storage = OptionsSyncStorage.getInstance();
+const messenger = new MessengerService(new WebextBridge(), storage);
 
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
     tab.title?.toLowerCase().includes("vitesicure")
   ) {
-    const savedOptions = await optionsStorage.getAll();
-    const tabIds: string[] = savedOptions.vitesicureTabIds
-      ? JSON.parse(savedOptions.vitesicureTabIds as string)
-      : [];
+    const tabIds: string[] = (await storage.get("vitesicureTabIds")) ?? [];
 
     if (!tabIds.includes(tabId.toString())) {
-      optionsStorage.set({
-        vitesicureTabIds: JSON.stringify(tabIds.concat([tabId.toString()])),
-      });
+      storage.set("vitesicureTabIds", tabIds.concat([tabId.toString()]));
     }
 
-    if (savedOptions.showPathBox) {
-      sendMessage(
+    if (storage.get("showPathBox")) {
+      messenger.send(
+        Location.Background,
+        Location.ContentScript,
         "load-path-box",
-        {},
-        { context: "content-script", tabId: tabId },
       );
     }
   }
 });
 
-browser.tabs.onRemoved.addListener(async function (tabId, removeInfo) {
-  const savedOptions = await optionsStorage.getAll();
-  const tabs: string[] = JSON.parse(savedOptions.vitesicureTabIds as string);
+browser.tabs.onRemoved.addListener(async function (tabId, _removeInfo) {
+  const tabs: string[] = (await storage.get("vitesicureTabIds")) ?? [];
   if (tabs.includes(tabId.toString())) {
-    console.log("removing tab id", tabId);
     tabs.splice(tabs.indexOf(tabId.toString()), 1);
-    optionsStorage.set({
-      vitesicureTabIds: JSON.stringify(tabs),
-    });
+    storage.set("vitesicureTabIds", tabs);
   }
 });

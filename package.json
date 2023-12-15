@@ -35,8 +35,11 @@
     "@storybook/svelte-vite": "^7.5.3",
     "@storybook/testing-library": "^0.2.2",
     "@sveltejs/vite-plugin-svelte": "^2.1.1",
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/svelte": "^4.0.5",
     "@tsconfig/svelte": "^4.0.1",
     "@types/chrome": "^0.0.228",
+    "@types/jsdom": "^21.1.6",
     "@types/node": "^20.9.0",
     "@types/webextension-polyfill": "^0.10.0",
     "crx": "^5.0.1",
@@ -55,6 +58,7 @@
     "typescript": "^5.0.4",
     "vite": "~4.3.3",
     "vitest": "^1.0.4",
+    "vitest-dom": "^0.1.1",
     "web-ext": "^7.6.2"
   },
   "dependencies": {

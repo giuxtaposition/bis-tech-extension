@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   export let checked = false;
-  export let label;
-  export let onChange;
+  export let label: string;
+  export let onChange: () => void;
 </script>
 
 <div>

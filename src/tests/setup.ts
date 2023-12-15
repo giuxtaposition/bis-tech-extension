@@ -1,3 +1,5 @@
+import "vitest-dom/extend-expect";
+
 // beforeAll(() => {
 //   const chromeMock = {
 //     tabs: {
