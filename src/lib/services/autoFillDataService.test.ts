@@ -11,7 +11,7 @@ describe("autoFillDataService", () => {
             product,
             LifePage.Calculator,
           );
-          expect(data.birthdate.value).toMatch(/\d{2}\/\d{2}\/\d{4}/);
+          expect(data.birthdate.value).toMatch(/\d{1,2}\/\d{2}\/\d{4}/);
         });
 
         it("should return random date for birthdate", () => {

@@ -13,6 +13,7 @@ describe("messengerService", () => {
   const mockedStorage = {
     getAll: vi.fn(),
     get: vi.fn(),
+    set: vi.fn(),
   };
 
   beforeAll(() => {

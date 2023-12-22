@@ -4,6 +4,7 @@ import MessengerService, {
   Location,
 } from "../../lib/services/messenger/messengerService";
 import WebextBridge from "../../lib/services/messenger/webextBridge";
+import TabsService from "../../lib/services/tabsService";
 
 browser.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
@@ -11,19 +12,16 @@ browser.runtime.onInstalled.addListener(() => {
 
 const storage = OptionsSyncStorage.getInstance();
 const messenger = new MessengerService(new WebextBridge(), storage);
+const tabs = new TabsService(storage);
 
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
     tab.title?.toLowerCase().includes("vitesicure")
   ) {
-    const tabIds: string[] = (await storage.get("vitesicureTabIds")) ?? [];
+    await tabs.addTab(tabId.toString());
 
-    if (!tabIds.includes(tabId.toString())) {
-      storage.set("vitesicureTabIds", tabIds.concat([tabId.toString()]));
-    }
-
-    if (storage.get("showPathBox")) {
+    if (await storage.get("showPathBox")) {
       messenger.send(
         Location.Background,
         Location.ContentScript,
@@ -34,9 +32,5 @@ browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
 });
 
 browser.tabs.onRemoved.addListener(async function (tabId, _removeInfo) {
-  const tabs: string[] = (await storage.get("vitesicureTabIds")) ?? [];
-  if (tabs.includes(tabId.toString())) {
-    tabs.splice(tabs.indexOf(tabId.toString()), 1);
-    storage.set("vitesicureTabIds", tabs);
-  }
+  await tabs.removeTab(tabId.toString());
 });
