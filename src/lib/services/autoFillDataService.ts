@@ -489,6 +489,12 @@ class AutoFillDataService {
       }),
     },
     [Product.Injury]: {
+      [InjuryPage.Select]: () => ({
+        protectMe: {
+          selector: "div[data-testid='injury-select-me']",
+          event: EventType.Click,
+        },
+      }),
       [InjuryPage.YourOffer]: () => ({
         birthdate: {
           value: "26/03/1997",

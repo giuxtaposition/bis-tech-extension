@@ -20,11 +20,15 @@
     "pack:xpi": "WEB_EXT_ARTIFACTS_DIR=./ web-ext build --source-dir ./dist --filename extension.xpi --overwrite-dest",
     "pack:zip": "rimraf extension.zip && jszip-cli add dist/* -o ./extension.zip",
     "test": "ENVIRONMENT=test vitest",
-    "coverage": "ENVIRONMENT=test vitest run --coverage"
+    "coverage": "ENVIRONMENT=test vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "MODE=UI pnpm run test:e2e --ui",
+    "build-and-test-e2e": "pnpm build --mode development && pnpm test:e2e"
   },
   "license": "MIT",
   "devDependencies": {
     "@ffflorian/jszip-cli": "^3.5.6",
+    "@playwright/test": "^1.40.1",
     "@samrum/vite-plugin-web-extension": "^5.0.0",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addon-interactions": "^7.5.3",

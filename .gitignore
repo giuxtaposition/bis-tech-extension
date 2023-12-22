@@ -5,3 +5,7 @@ extension.crx
 extension.xpi
 key.pem
 extension.zip
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
