@@ -1,9 +1,7 @@
 import browser from "webextension-polyfill";
 import OptionsSyncStorage from "../../lib/services/storage";
-import MessengerService, {
-  Location,
-} from "../../lib/services/messenger/messengerService";
-import WebextBridge from "../../lib/services/messenger/webextBridge";
+import MessengerService from "../../lib/services/messenger/messengerService";
+import MessagingClient from "../../lib/services/messenger/messagingClient";
 import TabsService from "../../lib/services/tabsService";
 
 browser.runtime.onInstalled.addListener(() => {
@@ -11,8 +9,8 @@ browser.runtime.onInstalled.addListener(() => {
 });
 
 const storage = OptionsSyncStorage.getInstance();
-const messenger = new MessengerService(new WebextBridge(), storage);
 const tabs = new TabsService(storage);
+const messenger = new MessengerService(new MessagingClient(), tabs);
 
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
@@ -22,11 +20,7 @@ browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
     await tabs.addTab(tabId.toString());
 
     if (await storage.get("showPathBox")) {
-      messenger.send(
-        Location.Background,
-        Location.ContentScript,
-        "load-path-box",
-      );
+      messenger.send("load-path-box");
     }
   }
 });

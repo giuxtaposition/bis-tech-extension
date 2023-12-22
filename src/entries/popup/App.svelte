@@ -2,14 +2,14 @@
   import { onMount } from "svelte";
   import Button from "~/lib/components/Button.svelte";
   import Switch from "~/lib/components/Switch.svelte";
-  import MessengerService, {
-    Location,
-  } from "~/lib/services/messenger/messengerService";
-  import WebextBridge from "~/lib/services/messenger/webextBridge";
+  import MessengerService from "~/lib/services/messenger/messengerService";
+  import BrowserMessagingClient from "~/lib/services/messenger/messagingClient";
   import OptionsSyncStorage from "~/lib/services/storage";
+  import TabsService from "~/lib/services/tabsService";
 
   const storage = OptionsSyncStorage.getInstance();
-  const messenger = new MessengerService(new WebextBridge(), storage);
+  const tabs = new TabsService(storage);
+  const messenger = new MessengerService(new BrowserMessagingClient(), tabs);
 
   let showPathBox = true;
 
@@ -20,19 +20,15 @@
   $: saveShowPathBox = async function () {
     storage.set("showPathBox", showPathBox);
 
-    messenger.send(
-      Location.Popup,
-      Location.ContentScript,
-      showPathBox ? "load-path-box" : "remove-path-box",
-    );
+    messenger.send(showPathBox ? "load-path-box" : "remove-path-box");
   };
 
   const autofill = async () => {
-    await messenger.send(Location.Popup, Location.ContentScript, "auto-fill");
+    await messenger.send("auto-fill");
   };
 
   const autofillAndGoToNextPage = async () => {
-    await messenger.send(Location.Popup, Location.ContentScript, "auto-fill", {
+    await messenger.send("auto-fill", {
       goToNextPage: true,
     });
   };

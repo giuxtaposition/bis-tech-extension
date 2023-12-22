@@ -25,13 +25,15 @@ class OptionsSyncStorage implements IStorage {
   }
 
   public async get(key: string): Promise<any> {
-    const all = await this.storage.getAll();
+    const all = await this.getAll();
 
     let item = all[key];
 
-    try {
-      item = JSON.parse(item);
-    } catch (error) {}
+    if (typeof item === "string") {
+      try {
+        item = JSON.parse(item);
+      } catch (error) {}
+    }
 
     return item;
   }

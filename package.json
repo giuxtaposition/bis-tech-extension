@@ -63,7 +63,6 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",
-    "webext-bridge": "^6.0.1",
     "webext-options-sync": "^4.2.1",
     "webextension-polyfill": "^0.10.0"
   },

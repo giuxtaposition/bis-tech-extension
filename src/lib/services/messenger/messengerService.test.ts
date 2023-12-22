@@ -1,68 +1,39 @@
 import MessengerService from "./messengerService";
-import { Location } from "./messengerService";
 
 describe("messengerService", () => {
   let messageService: MessengerService;
 
   const mockedMessagingClient = {
-    sendMessageFromPopup: vi.fn(),
-    sendMessageFromBackground: vi.fn(),
-    sendMessageFromContentScript: vi.fn(),
+    sendMessage: vi.fn(),
   };
 
-  const mockedStorage = {
-    getAll: vi.fn(),
-    get: vi.fn(),
-    set: vi.fn(),
-  };
+  const mockedTabsService = {
+    getTabs: vi.fn(),
+  } as any;
 
   beforeAll(() => {
-    messageService = new MessengerService(mockedMessagingClient, mockedStorage);
+    messageService = new MessengerService(
+      mockedMessagingClient,
+      mockedTabsService,
+    );
   });
 
-  it.each([
-    {
-      from: Location.Popup,
-      to: Location.Background,
-      fn: mockedMessagingClient.sendMessageFromPopup,
-    },
-    {
-      from: Location.Popup,
-      to: Location.ContentScript,
-      fn: mockedMessagingClient.sendMessageFromPopup,
-    },
-    {
-      from: Location.Background,
-      to: Location.ContentScript,
-      fn: mockedMessagingClient.sendMessageFromBackground,
-    },
-    {
-      from: Location.Background,
-      to: Location.Popup,
-      fn: mockedMessagingClient.sendMessageFromBackground,
-    },
-    {
-      from: Location.ContentScript,
-      to: Location.Background,
-      fn: mockedMessagingClient.sendMessageFromContentScript,
-    },
-    {
-      from: Location.ContentScript,
-      to: Location.Popup,
-      fn: mockedMessagingClient.sendMessageFromContentScript,
-    },
-  ])("should send message from and to correctly", async ({ from, to, fn }) => {
-    mockedStorage.get.mockResolvedValueOnce(["tabId"]);
-    messageService.send(from, to, "messageTest", {
+  it("sendMessage should send message to each saved tab", async () => {
+    mockedTabsService.getTabs.mockResolvedValueOnce(["tabId1", "tabId2"]);
+    messageService.send("messageTest", {
       myContent: "test",
     });
 
     await vi.waitFor(() => {
-      expect(fn).toHaveBeenCalledWith(
+      expect(mockedMessagingClient.sendMessage).toHaveBeenCalledWith(
         "messageTest",
         { myContent: "test" },
-        to,
-        "tabId",
+        "tabId1",
+      );
+      expect(mockedMessagingClient.sendMessage).toHaveBeenCalledWith(
+        "messageTest",
+        { myContent: "test" },
+        "tabId2",
       );
     });
   });
