@@ -1,8 +1,8 @@
 import browser from "webextension-polyfill";
 import PathBoxComponent from "../../../lib/components/PathBox.svelte";
-import AutoFillService from "../../../lib/services/autoFillService";
 import { waitForElement } from "../../../lib/utils/waitForElement";
 import prepareComponent from "../renderContent";
+import PageFactory from "../../../lib/pages/pageFactory";
 
 browser.runtime.onMessage.addListener(
   async function (message, sender, sendResponse) {
@@ -40,8 +40,13 @@ browser.runtime.onMessage.addListener(
       const [_, product, isPreventivatorePage, isOtherPage] =
         window.location.pathname.split("/");
 
-      const page = isOtherPage ? isOtherPage : isPreventivatorePage;
-      AutoFillService.autofill(product, page, goToNextPage);
+      const path = isOtherPage ? isOtherPage : isPreventivatorePage;
+      const page = PageFactory.getPage(product, path);
+      await page.autofill();
+
+      if (goToNextPage) {
+        page.goToNextPage();
+      }
     }
   },
 );

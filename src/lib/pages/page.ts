@@ -1,0 +1,76 @@
+import { time } from "console";
+
+export default abstract class Page {
+  static path: string;
+
+  protected clickWithXpath(xpath: string) {
+    const element = document.evaluate(
+      xpath,
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null,
+    ).singleNodeValue as HTMLElement;
+
+    this.simulateMouseClick(element);
+  }
+
+  protected clickMultiples(selector: string) {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(selector);
+    buttons.forEach((button) => this.simulateMouseClick(button));
+  }
+
+  protected changeInputValue(inputSelector: string, value: string) {
+    const input = this.getInput(inputSelector);
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      "value",
+    ).set;
+    nativeInputValueSetter.call(input, value);
+
+    const inputEvent = new Event("input", { bubbles: true });
+    input.dispatchEvent(inputEvent);
+
+    const blurEvent = new Event("blur", { bubbles: true });
+    input.dispatchEvent(blurEvent);
+  }
+
+  protected clickInputElement(inputSelector: string) {
+    const input = this.getInput(inputSelector);
+
+    this.simulateMouseClick(input);
+  }
+
+  protected simulateMouseClick(element: HTMLElement) {
+    const mouseClickEvents = ["mousedown", "click", "mouseup"];
+    mouseClickEvents.forEach((mouseEventType) =>
+      element.dispatchEvent(
+        new MouseEvent(mouseEventType, {
+          view: window,
+          bubbles: true,
+          cancelable: true,
+          buttons: 1,
+        }),
+      ),
+    );
+  }
+
+  protected getInput(inputSelector: string): HTMLInputElement {
+    return document.querySelector<HTMLInputElement>(inputSelector);
+  }
+
+  protected async withDelay(f: () => any, delay: number = 200) {
+    const timeout = () => new Promise((resolve) => setTimeout(resolve, delay));
+
+    await timeout();
+    return f();
+  }
+
+  public abstract async autofill(): Promise<void>;
+
+  public goToNextPage() {
+    const allButtons = document.querySelectorAll<HTMLButtonElement>("button");
+    const lastButton = allButtons[allButtons.length - 1];
+    this.simulateMouseClick(lastButton);
+  }
+}
