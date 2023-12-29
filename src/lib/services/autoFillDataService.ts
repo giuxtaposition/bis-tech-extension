@@ -1,6 +1,5 @@
-import { fakerIT as faker } from "@faker-js/faker";
-
 import { Product } from "../../types";
+import FakeDataService from "./fakeDataService";
 
 export enum EventType {
   Change = "change",
@@ -42,7 +41,7 @@ class AutoFillDataService {
     [Product.SquareLife]: {
       [LifePage.Calculator]: () => ({
         birthdate: {
-          value: this.fakeBirthdate(),
+          value: FakeDataService.birthdate(),
           event: EventType.Change,
           selector: "input[name='customerInfo.birthDate']",
         },
@@ -57,22 +56,22 @@ class AutoFillDataService {
       }),
       [LifePage.YourOffer]: () => ({
         name: {
-          value: this.fakeName(),
+          value: FakeDataService.firstName(),
           event: EventType.Change,
           selector: "input[name='customerInfo.firstName']",
         },
         surname: {
-          value: this.fakeSurname(),
+          value: FakeDataService.lastName(),
           event: EventType.Change,
           selector: "input[name='customerInfo.lastName']",
         },
         email: {
-          value: this.fakeEmail(),
+          value: FakeDataService.email(),
           event: EventType.Change,
           selector: "input[name='customerInfo.email']",
         },
         phone: {
-          value: this.fakePhone(),
+          value: FakeDataService.phone(),
           event: EventType.Change,
           selector: "input[name='customerInfo.phoneNumber']",
         },
@@ -114,7 +113,7 @@ class AutoFillDataService {
           selector: 'input[name="customerInfo.gender"]',
         },
         birthCity: {
-          value: this.fakeCity(),
+          value: FakeDataService.city(),
           event: EventType.Change,
           selector: "input[name='customerInfo.birthCity']",
           withDelay: true,
@@ -155,7 +154,7 @@ class AutoFillDataService {
           withDelay: true,
         },
         street: {
-          value: this.fakeStreet(),
+          value: FakeDataService.street(),
           event: EventType.Change,
           selector: "input[name='street']",
           withDelay: true,
@@ -280,7 +279,7 @@ class AutoFillDataService {
     [Product.NetLife]: {
       [LifePage.Calculator]: () => ({
         birthdate: {
-          value: this.fakeBirthdate(74),
+          value: FakeDataService.birthdate(74),
           event: EventType.Change,
           selector: "input[name='birthDate']",
         },
@@ -295,22 +294,22 @@ class AutoFillDataService {
       }),
       [LifePage.YourOffer]: () => ({
         name: {
-          value: this.fakeName(),
+          value: FakeDataService.firstName(),
           event: EventType.Change,
           selector: "input[name='contacts.name']",
         },
         surname: {
-          value: this.fakeSurname(),
+          value: FakeDataService.lastName(),
           event: EventType.Change,
           selector: "input[name='contacts.surname']",
         },
         email: {
-          value: this.fakeEmail(),
+          value: FakeDataService.email(),
           event: EventType.Change,
           selector: "input[name='contacts.email']",
         },
         phone: {
-          value: this.fakePhone(),
+          value: FakeDataService.phone(),
           event: EventType.Change,
           selector: "input[name='contacts.phone']",
         },
@@ -356,7 +355,7 @@ class AutoFillDataService {
       }),
       [LifePage.PersonalData]: () => ({
         birthCity: {
-          value: this.fakeCity(),
+          value: FakeDataService.city(),
           event: EventType.Change,
           selector: "input[name='cityOfBirth']",
         },
@@ -395,7 +394,7 @@ class AutoFillDataService {
             '//*[text()[contains(.,"tutte le informazioni via email")]]/../../..//button[2]',
         },
         street: {
-          value: this.fakeStreet(),
+          value: FakeDataService.street(),
           event: EventType.Change,
           selector: "input[name='residence.address.street']",
         },
@@ -678,48 +677,6 @@ class AutoFillDataService {
 
   public static getAutoFillData(product: string, page: string): AutoFillData {
     return this.autofillData[product][page]();
-  }
-
-  private static fakeBirthdate(maxAge: number = 70) {
-    const date = faker.date.birthdate({
-      max: maxAge,
-      min: 18,
-      mode: "age",
-    });
-
-    const year = date.getUTCFullYear();
-    let month: number | string = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-
-    if (month < 10) {
-      month = "0" + month;
-    }
-
-    return `${day}/${month}/${year}`;
-  }
-
-  private static fakeName() {
-    return faker.person.firstName();
-  }
-
-  private static fakeSurname() {
-    return faker.person.lastName();
-  }
-
-  private static fakeEmail() {
-    return faker.internet.email({ provider: "vitesicure.it" });
-  }
-
-  private static fakePhone() {
-    return "3" + faker.string.numeric({ length: 9 });
-  }
-
-  private static fakeCity() {
-    return faker.location.city();
-  }
-
-  private static fakeStreet() {
-    return faker.location.street();
   }
 }
 
