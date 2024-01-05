@@ -1,10 +1,7 @@
 **/dist
 **/node_modules
+**/extension
 .DS_Store
-extension.crx
-extension.xpi
-key.pem
-extension.zip
 /test-results/
 /playwright-report/
 /blob-report/
