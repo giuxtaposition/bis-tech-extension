@@ -19,10 +19,6 @@ browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
       tab.title?.toLowerCase().includes("bridge insurance services"))
   ) {
     await tabs.addTab(tabId.toString());
-
-    if (await storage.get("showPathBox")) {
-      messenger.send("load-path-box");
-    }
   }
 });
 
