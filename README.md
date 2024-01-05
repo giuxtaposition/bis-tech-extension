@@ -13,7 +13,8 @@ Bis-Tech extension is a web extension to make life easier for vitesicure product
 
 ## Permissions required
 
-- `"http://localhost:3000/*"`, `"https://calc-dev.vitesicure.it/*"`, `"https://calc-staging.vitesicure.it/*"` - for running on the vitesicure dev environments.
+- `"http://calc-local.vitesicure.it:3000/*"`, `"https://calc-dev.vitesicure.it/*"`, `"https://calc-staging.vitesicure.it/*"` - for running on the vitesicure dev environments.
+- `"http://calc-local.bridgebroker.it:3000/*"`, `"https://calc-dev.bridgebroker.it/*"`, `"https://calc-staging.bridgebroker.it/*"` - for running on the bridgebroker dev environments.
 - `storage` - for storing user preferences and needed tabs info.
 - `tabs, activeTab, webNavigation and scription` - for actually doing what the extension offers.
 
