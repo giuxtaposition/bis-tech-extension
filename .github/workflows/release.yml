@@ -1,0 +1,45 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  release:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 21
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Release version
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+      - name: Run unit tests
+        run: pnpm test
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Build extension and run e2e tests
+        run: pnpm build-and-test-e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+      - name: Build Firefox extension
+        run: pnpm build-firefox && pnpm pack:xpi
+      - name: Build Chromium extension
+        run: pnpm build && pnpm pack:crx
+      - uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          artifacts: "extension/*"
+          body: "Release ${{ env.RELEASE_VERSION}}"
+          generateReleaseNotes: true
