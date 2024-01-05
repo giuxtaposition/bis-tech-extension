@@ -1,4 +1,4 @@
-import { test, expect } from "./fixtures.ts";
+import { test, expect } from "./fixtures";
 
 test.describe("PathBox", () => {
   const paths = ["vita", "caso-morte", "infortuni"];
@@ -6,8 +6,6 @@ test.describe("PathBox", () => {
   for (const path of paths) {
     test(`in /${path} path, should render path box`, async ({ page }) => {
       await page.goto(`https://calc-dev.vitesicure.it/${path}`);
-
-      await page.waitForSelector("#vitesicure-path-box", { timeout: 50000 });
 
       await expect(page.locator("#vitesicure-path-box #path-box")).toHaveText(
         path,
@@ -35,10 +33,6 @@ test.describe("PathBox", () => {
 
       await page.bringToFront();
       await page.waitForURL(/.*(la-tua-offerta)|(la-tua-polizza-infortuni)$/);
-
-      await page.waitForSelector("#vitesicure-path-box", {
-        timeout: 50000,
-      });
 
       await expect(page.locator("#vitesicure-path-box #path-box")).toHaveText(
         path,
