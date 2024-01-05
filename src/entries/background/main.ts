@@ -15,7 +15,8 @@ const messenger = new MessengerService(new MessagingClient(), tabs);
 browser.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
   if (
     changeInfo.status == "complete" &&
-    tab.title?.toLowerCase().includes("vitesicure")
+    (tab.title?.toLowerCase().includes("vitesicure") ||
+      tab.title?.toLowerCase().includes("bridge insurance services"))
   ) {
     await tabs.addTab(tabId.toString());
 
