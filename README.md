@@ -1,5 +1,8 @@
 # 🥩 Bis-Tech Extension
 
+[![Tests](https://github.com/giuxtaposition/bis-tech-extension/actions/workflows/tests.yml/badge.svg)](https://github.com/giuxtaposition/bis-tech-extension/actions/workflows/tests.yml)
+[![Release](https://img.shields.io/github/v/release/giuxtaposition/bis-tech-extension.svg?maxAge=3600&label=release)](https://github.com/giuxtaposition/bis-tech-extension/releases)
+
 Bis-Tech extension is a web extension to make life easier for vitesicure product team helping them test faster the various products offered by vitesicure.
 
 ![](/.github/images/path-box.png)
@@ -57,6 +60,14 @@ Loads the contents of the dist directory into the specified browser
 ```sh
 pnpm serve:chrome
 pnpm serve:firefox
+```
+
+### Testing
+
+```sh
+pnpm test # unit tests
+pnpm build-and-test-e2e # e2e tests, extension must be built first
+pnpm test:e2e # for when extension has been already built
 ```
 
 > [!NOTE]  
