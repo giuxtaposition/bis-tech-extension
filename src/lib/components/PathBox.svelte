@@ -19,7 +19,7 @@
     text-transform: uppercase;
     position: fixed;
     top: 20%;
-    left: -3%;
+    left: -25px;
     border-radius: 0 25px 25px 0;
     border: 2px solid;
     min-width: 60px;
