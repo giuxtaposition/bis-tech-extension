@@ -6,13 +6,13 @@ import BeneficiariesPage from "./life/beneficiariesPage";
 import CheckoutPage from "./life/checkoutPage";
 import HealthStatusPage from "./life/healthStatusPage";
 import PersonalDataPage from "./life/personalDataPage";
-import PreventivatorePage from "./life/preventivatore-page";
+import PreventivatorePage from "./life/preventivatorePage";
 import YourOfferPage from "./life/yourOfferPage";
 import OldBeneficiariesPage from "./old-life/beneficiariesPage";
 import OldCheckoutPage from "./old-life/checkoutPage";
 import OldHealthStatusPage from "./old-life/healthStatusPage";
 import OldPersonalDataPage from "./old-life/personalDataPage";
-import OldPreventivatorePage from "./old-life/preventivatore-page";
+import OldPreventivatorePage from "./old-life/preventivatorePage";
 import OldYourOfferPage from "./old-life/yourOfferPage";
 import PageFactory from "./pageFactory";
 
