@@ -28,9 +28,11 @@ const sharedManifest: Partial<chrome.runtime.ManifestBase> = {
   },
   permissions: ["tabs", "storage", "activeTab", "webNavigation", "scripting"],
   browser_specific_settings: {
-    gecko: {
-      id: "bis-tech-extension@vitesicure.it",
-    },
+    ...(isFirefox && {
+      gecko: {
+        id: "bis-tech-extension-firefox@vitesicure.it",
+      },
+    }),
   },
 };
 
