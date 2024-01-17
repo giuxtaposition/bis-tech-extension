@@ -27,8 +27,8 @@ export default class PersonalDataPage extends Page {
     this.changeInputValue(this.gender, "MALE");
     this.clickWithXpath(this.fiscalCode);
     this.changeInputValue(this.job, "LIVESTOCK_BREEDER");
-    this.changeInputValue(this.maritalStatus, "Single");
-    this.changeInputValue(this.familyUnitType, "Single");
+    this.changeInputValue(this.maritalStatus, "SINGLE");
+    this.changeInputValue(this.familyUnitType, "SINGLE");
     this.clickWithXpath(this.isPoliticallExposed);
     this.clickWithXpath(this.allInfoViaEmail);
     this.changeInputValue(this.street, FakeDataService.street());

@@ -12,7 +12,7 @@ export default class BeneficiariesPage extends Page {
   async autofill(): Promise<void> {
     this.changeInputValue(
       this.beneficiariesType,
-      "legitimateAndTestamentaryHeirs",
+      "LEGITIMATE_AND_TESTAMENTARY_HEIRS",
     );
     this.clickInputElement(this.capitalToBeneficiaries);
     this.clickInputElement(this.insuranceIsNotSavings);

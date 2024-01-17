@@ -25,12 +25,12 @@ export default class CheckoutPage extends Page {
     "//div[@data-testid='confirmObligations']//button";
 
   async autofill(): Promise<void> {
-    this.changeInputValue(this.documentType, "passport");
+    this.changeInputValue(this.documentType, "PASSPORT");
     this.changeInputValue(this.documentCode, "ASD123");
     this.changeInputValue(this.documentReleaseDate, "01/01/2020");
     this.changeInputValue(this.documentExpirationDate, "01/01/2030");
     this.changeInputValue(this.documentReleasePlace, FakeDataService.city());
-    this.changeInputValue(this.documentReleaseAuthority, "prefecture");
+    this.changeInputValue(this.documentReleaseAuthority, "PREFECTURE");
     this.clickWithXpath(this.medicalExams);
     this.clickWithXpath(this.dataTruthfulness);
     this.clickWithXpath(this.termsAndConditions);
