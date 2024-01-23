@@ -85,11 +85,7 @@ class FakeDataService {
   }
 
   public static phone() {
-    let phoneNumber: string;
-    do {
-      phoneNumber = "3" + faker.string.numeric({ length: 9 });
-    } while (phoneNumber[1]==="0")
-    return phoneNumber;
+    return  "3" + faker.string.numeric({ length: 1, exclude: "0" }) + faker.string.numeric({ length: 8 });
   }
 
   public static street() {
