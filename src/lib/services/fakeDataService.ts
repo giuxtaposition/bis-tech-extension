@@ -85,7 +85,7 @@ class FakeDataService {
   }
 
   public static phone() {
-    return "3" + faker.string.numeric({ length: 9 });
+    return  "3" + faker.string.numeric({ length: 1, exclude: "0" }) + faker.string.numeric({ length: 8 });
   }
 
   public static street() {

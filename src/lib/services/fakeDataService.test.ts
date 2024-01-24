@@ -34,6 +34,14 @@ describe("FakeDataService tests", () => {
     expect(phone).not.toEqual(FakeDataService.phone());
   });
 
+  it('phone should return a random phone number without "0" as second phone digit', () => {
+    for(let i = 0; i < 1000; i++) {
+      const phone = FakeDataService.phone();
+      expect(phone).toMatch(/^(\+39)?\d{10}$/);
+      expect(phone[1]).not.toEqual("0");
+    }
+  });
+
   it("street should return a random street name", () => {
     const street = FakeDataService.street();
     expect(street).toBeTypeOf("string");
