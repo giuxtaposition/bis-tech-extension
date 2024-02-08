@@ -1,10 +1,10 @@
 # 🥩 Bis-Tech Extension [![Tests](https://github.com/giuxtaposition/bis-tech-extension/actions/workflows/tests.yml/badge.svg)](https://github.com/giuxtaposition/bis-tech-extension/actions/workflows/tests.yml) [![Release](https://img.shields.io/github/v/release/giuxtaposition/bis-tech-extension.svg?maxAge=3600&label=release)](https://github.com/giuxtaposition/bis-tech-extension/releases)
 
 <p align="center">
-  <a href="https://github.com/giuxtaposition/bis-tech-extension/releases/download/v1.0.1/extension.xpi" target="_blank">
+  <a href="https://github.com/giuxtaposition/bis-tech-extension/wiki/Install-extension-for-Chromium-(base)-browser" target="_blank">
     <img width="178" height="48" src="https://github.com/giuxtaposition/bis-tech-extension/blob/main/.github/images/chrome.png">
   </a>
-  <a href="https://github.com/giuxtaposition/bis-tech-extension/wiki/Install-extension-for-Chromium-(base)-browser" target="_blank">
+  <a href="https://github.com/giuxtaposition/bis-tech-extension/releases/download/v1.0.2/extension.xpi" target="_blank">
     <img width="160" height="48" src="https://github.com/giuxtaposition/bis-tech-extension/blob/main/.github/images/firefox.png">
   </a>
 </p>
