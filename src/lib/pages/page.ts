@@ -12,6 +12,10 @@ export default abstract class Page {
       null,
     ).singleNodeValue as HTMLElement;
 
+    if (!element) {
+      return;
+    }
+
     this.simulateMouseClick(element);
   }
 
@@ -22,6 +26,11 @@ export default abstract class Page {
 
   protected changeInputValue(inputSelector: string, value: string) {
     const input = this.getInput(inputSelector);
+
+    if (!input) {
+      return;
+    }
+
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
       "value",
@@ -37,6 +46,10 @@ export default abstract class Page {
 
   protected clickInputElement(inputSelector: string) {
     const input = this.getInput(inputSelector);
+
+    if (!input) {
+      return;
+    }
 
     this.simulateMouseClick(input);
   }
@@ -55,7 +68,7 @@ export default abstract class Page {
     );
   }
 
-  protected getInput(inputSelector: string): HTMLInputElement {
+  protected getInput(inputSelector: string): HTMLInputElement | null {
     return document.querySelector<HTMLInputElement>(inputSelector);
   }
 

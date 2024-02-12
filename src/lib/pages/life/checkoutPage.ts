@@ -11,11 +11,14 @@ export default class CheckoutPage extends Page {
   private documentReleasePlace = "input[name='insured.document.releasePlace']";
   private documentReleaseAuthority =
     "input[name='insured.document.releaseAuthority']";
+
   private medicalExams =
     "//div[@data-testid='wantsToDoMedicalExam']//button[2]";
 
-  private dataTruthfulness = "//div[@data-testid='dataTruthfulness']//button";
+  private iban = "input[name='payment.iban']";
 
+  private isAccountHolder = "//div[@data-testid='isAccountHolder']//button";
+  private dataTruthfulness = "//div[@data-testid='dataTruthfulness']//button";
   private termsAndConditions =
     "//div[@data-testid='termsAndConditions']//button";
   private privacyPolicyExtended =
@@ -32,6 +35,8 @@ export default class CheckoutPage extends Page {
     this.changeInputValue(this.documentReleasePlace, FakeDataService.city());
     this.changeInputValue(this.documentReleaseAuthority, "PREFECTURE");
     this.clickWithXpath(this.medicalExams);
+    this.changeInputValue(this.iban, "IT87D0300203280616976634975");
+    this.clickWithXpath(this.isAccountHolder);
     this.clickWithXpath(this.dataTruthfulness);
     this.clickWithXpath(this.termsAndConditions);
     this.clickWithXpath(this.privacyPolicyExtended);
