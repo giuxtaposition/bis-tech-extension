@@ -13,19 +13,22 @@ export default class CheckoutPage extends Page {
     "input[name='insured.document.releaseAuthority']";
 
   private medicalExams =
-    "//div[@data-testid='wantsToDoMedicalExam']//button[2]";
+    "//div[@data-testid='question-wantsToDoMedicalExam']//button[2]";
 
   private iban = "input[name='payment.iban']";
 
-  private isAccountHolder = "//div[@data-testid='isAccountHolder']//button";
-  private dataTruthfulness = "//div[@data-testid='dataTruthfulness']//button";
+  private isAccountHolder =
+    "//div[@data-testid='question-payment.isAccountHolder']//button";
+  private dataTruthfulness =
+    "//div[@data-testid='question-compliance.dataTruthfulness']//button";
   private termsAndConditions =
-    "//div[@data-testid='termsAndConditions']//button";
+    "//div[@data-testid='question-compliance.termsAndConditions']//button";
   private privacyPolicyExtended =
-    "//div[@data-testid='privacyPolicyExtended']//button";
-  private otherPolicies = "//div[@data-testid='otherPolicies']//button";
+    "//div[@data-testid='question-privacyPolicyExtended']//button";
+  private otherPolicies =
+    "//div[@data-testid='question-compliance.otherPolicies']//button";
   private confirmObligations =
-    "//div[@data-testid='confirmObligations']//button";
+    "//div[@data-testid='question-compliance.confirmObligations']//button";
 
   async autofill(): Promise<void> {
     this.changeInputValue(this.documentType, "PASSPORT");
