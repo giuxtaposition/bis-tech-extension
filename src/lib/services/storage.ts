@@ -14,6 +14,7 @@ class OptionsSyncStorage implements IStorage {
     this.storage = new OptionsSync({
       defaults: {
         showPathBox: true,
+        debugMode: false,
       },
       migrations: [OptionsSync.migrations.removeUnused],
       logging: true,

@@ -1,11 +1,12 @@
-import browser from "webextension-polyfill";
 import PathBoxComponent from "../../../lib/components/PathBox.svelte";
 import { waitForElement } from "../../../lib/utils/waitForElement";
 import prepareComponent from "../renderContent";
 import PageFactory from "../../../lib/pages/pageFactory";
 import OptionsSyncStorage from "../../../lib/services/storage";
+import BrowserMessagingClient from "../../../lib/services/messenger/messagingClient";
 
 const storage = OptionsSyncStorage.getInstance();
+const messageListener = new BrowserMessagingClient();
 
 let lastUrl = location.href;
 new MutationObserver(() => {
@@ -36,36 +37,24 @@ async function loadPathBox() {
 
 loadPathBox();
 
-browser.runtime.onMessage.addListener(
-  async function (message, sender, sendResponse) {
-    if (message.message === "auto-fill") {
-      const { goToNextPage } = message.content;
-      const [_, product, isPreventivatorePage, isOtherPage] =
-        window.location.pathname.split("/");
+messageListener.listenForMessage("auto-fill", async (content) => {
+  const { goToNextPage } = content;
+  const [_, product, isPreventivatorePage, isOtherPage] =
+    window.location.pathname.split("/");
 
-      const path = isOtherPage ? isOtherPage : isPreventivatorePage;
-      const page = PageFactory.getPage(product, path);
-      await page.autofill();
+  const path = isOtherPage ? isOtherPage : isPreventivatorePage;
+  const page = PageFactory.getPage(product, path);
+  await page.autofill();
 
-      if (goToNextPage) {
-        page.goToNextPage();
-      }
-    }
-  },
-);
+  if (goToNextPage) {
+    page.goToNextPage();
+  }
+});
 
-browser.runtime.onMessage.addListener(
-  async function (message, sender, sendResponse) {
-    if (message.message === "remove-path-box") {
-      document.getElementById("vitesicure-path-box")?.remove();
-    }
-  },
-);
+messageListener.listenForMessage("remove-path-box", async () => {
+  document.getElementById("vitesicure-path-box")?.remove();
+});
 
-browser.runtime.onMessage.addListener(
-  async function (message, sender, sendResponse) {
-    if (message.message === "load-path-box") {
-      loadPathBox();
-    }
-  },
-);
+messageListener.listenForMessage("load-path-box", async () => {
+  loadPathBox();
+});

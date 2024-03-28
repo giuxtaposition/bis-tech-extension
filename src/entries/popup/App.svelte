@@ -12,16 +12,23 @@
   const messenger = new MessengerService(new BrowserMessagingClient(), tabs);
 
   let showPathBox = true;
+  let debugMode = false;
 
   onMount(async () => {
     showPathBox = await storage.get("showPathBox");
+    debugMode = await storage.get("debugMode");
   });
 
   $: saveShowPathBox = async function () {
     storage.set("showPathBox", showPathBox);
-
-    messenger.send(showPathBox ? "load-path-box" : "remove-path-box");
   };
+
+  $: saveDebugMode = async function () {
+    storage.set("debugMode", debugMode);
+  };
+
+  $: messenger.send(debugMode ? "set-debug-mode" : "unset-debug-mode");
+  $: messenger.send(showPathBox ? "load-path-box" : "remove-path-box");
 
   const autofill = async () => {
     await messenger.send("auto-fill");
@@ -39,6 +46,11 @@
     bind:checked={showPathBox}
     label="Show path box"
     onChange={saveShowPathBox}
+  />
+  <Switch
+    bind:checked={debugMode}
+    label="Debug mode"
+    onChange={saveDebugMode}
   />
   <Button label="Autofill page" onClick={autofill} />
   <Button

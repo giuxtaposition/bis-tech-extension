@@ -1,7 +1,20 @@
-import { time } from "console";
+import BrowserMessagingClient from "../services/messenger/messagingClient";
 
 export default abstract class Page {
   static path: string;
+  protected debugMode: boolean;
+
+  constructor() {
+    const messageListener = new BrowserMessagingClient();
+
+    messageListener.listenForMessage("set-debug-mode", () => {
+      this.debugMode = true;
+    });
+
+    messageListener.listenForMessage("unset-debug-mode", () => {
+      this.debugMode = false;
+    });
+  }
 
   protected clickWithXpath(xpath: string) {
     const element = document.evaluate(
@@ -42,6 +55,10 @@ export default abstract class Page {
 
     const blurEvent = new Event("blur", { bubbles: true });
     input.dispatchEvent(blurEvent);
+
+    if (this.debugMode) {
+      console.info(`Changed input ${inputSelector} to ${value}`);
+    }
   }
 
   protected clickInputElement(inputSelector: string) {
@@ -79,7 +96,7 @@ export default abstract class Page {
     return f();
   }
 
-  public abstract async autofill(): Promise<void>;
+  public abstract autofill(): Promise<void>;
 
   public goToNextPage() {
     const allButtons = document.querySelectorAll<HTMLButtonElement>("button");
