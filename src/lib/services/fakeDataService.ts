@@ -63,7 +63,11 @@ class FakeDataService {
 
     const year = date.getUTCFullYear();
     let month: number | string = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
+    let day: number | string = date.getUTCDate();
+
+    if (day < 10) {
+      day = "0" + day;
+    }
 
     if (month < 10) {
       month = "0" + month;
@@ -85,7 +89,11 @@ class FakeDataService {
   }
 
   public static phone() {
-    return  "3" + faker.string.numeric({ length: 1, exclude: "0" }) + faker.string.numeric({ length: 8 });
+    return (
+      "3" +
+      faker.string.numeric({ length: 1, exclude: "0" }) +
+      faker.string.numeric({ length: 8 })
+    );
   }
 
   public static street() {
