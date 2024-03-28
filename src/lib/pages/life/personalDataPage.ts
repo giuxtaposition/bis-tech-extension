@@ -4,23 +4,23 @@ import Page from "../page";
 export default class PersonalDataPage extends Page {
   public static path: string = "dati-personali";
 
-  private birthCity = "input[name='cityOfBirth']";
-  private gender = "input[name='gender']";
-  private fiscalCode = '//input[@name="fiscalCode"]/..//button';
+  private birthCity = "input[name='insured.cityOfBirth']";
+  private gender = "input[name='insured.gender']";
+  private fiscalCode = '//input[@name="insured.fiscalCode"]/..//button';
 
-  private job = "input[name='profession']";
-  private maritalStatus = "input[name='maritalStatus']";
-  private familyUnitType = "input[name='familyUnitType']";
+  private job = "input[name='insured.profession']";
+  private maritalStatus = "input[name='insured.maritalStatus']";
+  private familyUnitType = "input[name='insured.familyUnitType']";
   private isPoliticallExposed =
-    "//div[@data-testid='question-isPoliticallyExposedAndHasAdministrativeResponsibility']//button[2]";
+    "//div[@data-testid='question-insured.isPoliticallyExposedAndHasAdministrativeResponsibility']//button[2]";
   private allInfoViaEmail =
-    "//div[@data-testid='question-allCommunicationsByEmail']//button";
-  private street = "input[name='residence.address.street']";
-  private streetNumber = "input[name='residence.address.streetNumber']";
-  private postalCode = "input[name='residence.address.postalCode']";
-  private city = "input[name='residence.city.name']";
-  private province = "input[name='residence.province.name']";
-  private state = "input[name='residence.state.name']";
+    "//div[@data-testid='question-insured.allCommunicationsByEmail']//button";
+  private street = "input[name='insured.residence.address.street']";
+  private streetNumber = "input[name='insured.residence.address.streetNumber']";
+  private postalCode = "input[name='insured.residence.address.postalCode']";
+  private city = "input[name='insured.residence.city.name']";
+  private province = "input[name='insured.residence.province.name']";
+  private state = "input[name='insured.residence.state.name']";
 
   async autofill(): Promise<void> {
     this.changeInputValue(this.birthCity, FakeDataService.city());
