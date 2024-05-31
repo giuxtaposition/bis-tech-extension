@@ -2,14 +2,10 @@
   import { onMount } from "svelte";
   import Button from "~/lib/components/Button.svelte";
   import Switch from "~/lib/components/Switch.svelte";
-  import MessengerService from "~/lib/services/messenger/messengerService";
-  import BrowserMessagingClient from "~/lib/services/messenger/messagingClient";
+  import MessagingService from "~/lib/services/messagingService/messagingService";
   import OptionsSyncStorage from "~/lib/services/storage";
-  import TabsService from "~/lib/services/tabsService";
 
   const storage = OptionsSyncStorage.getInstance();
-  const tabs = new TabsService(storage);
-  const messenger = new MessengerService(new BrowserMessagingClient(), tabs);
 
   let showPathBox = true;
   let debugMode = false;
@@ -27,15 +23,15 @@
     storage.set("debugMode", debugMode);
   };
 
-  $: messenger.send(debugMode ? "set-debug-mode" : "unset-debug-mode");
-  $: messenger.send(showPathBox ? "load-path-box" : "remove-path-box");
+  $: MessagingService.send(debugMode ? "set-debug-mode" : "unset-debug-mode");
+  $: MessagingService.send(showPathBox ? "load-path-box" : "remove-path-box");
 
   const autofill = async () => {
-    await messenger.send("auto-fill");
+    await MessagingService.send("auto-fill");
   };
 
   const autofillAndGoToNextPage = async () => {
-    await messenger.send("auto-fill", {
+    await MessagingService.send("auto-fill", {
       goToNextPage: true,
     });
   };

@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import webExtension from "@samrum/vite-plugin-web-extension";
+import checker from "vite-plugin-checker";
 import path from "path";
 import { getManifest } from "./src/manifest";
 
@@ -13,6 +14,9 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       svelte(),
+      checker({
+        typescript: true,
+      }),
       process.env.ENVIRONMENT === "storybook" ||
       process.env.ENVIRONMENT === "test"
         ? null
@@ -24,6 +28,12 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         "~": path.resolve(__dirname, "./src"),
+        ...(process.env.ENVIRONMENT === "test" && {
+          "webextension-polyfill": path.resolve(
+            __dirname,
+            "./src/tests/mock/webextension-polyfill.ts",
+          ),
+        }),
       },
     },
     test: {

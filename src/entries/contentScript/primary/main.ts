@@ -3,10 +3,9 @@ import { waitForElement } from "../../../lib/utils/waitForElement";
 import prepareComponent from "../renderContent";
 import PageFactory from "../../../lib/pages/pageFactory";
 import OptionsSyncStorage from "../../../lib/services/storage";
-import BrowserMessagingClient from "../../../lib/services/messenger/messagingClient";
+import MessagingService from "../../../lib/services/messagingService/messagingService";
 
 const storage = OptionsSyncStorage.getInstance();
-const messageListener = new BrowserMessagingClient();
 
 let lastUrl = location.href;
 new MutationObserver(() => {
@@ -37,7 +36,7 @@ async function loadPathBox() {
 
 loadPathBox();
 
-messageListener.listenForMessage("auto-fill", async (content) => {
+MessagingService.listen("auto-fill", async (content) => {
   const { goToNextPage } = content;
   const [_, product, isPreventivatorePage, isOtherPage] =
     window.location.pathname.split("/");
@@ -51,10 +50,10 @@ messageListener.listenForMessage("auto-fill", async (content) => {
   }
 });
 
-messageListener.listenForMessage("remove-path-box", async () => {
+MessagingService.listen("remove-path-box", async () => {
   document.getElementById("vitesicure-path-box")?.remove();
 });
 
-messageListener.listenForMessage("load-path-box", async () => {
+MessagingService.listen("load-path-box", async () => {
   loadPathBox();
 });

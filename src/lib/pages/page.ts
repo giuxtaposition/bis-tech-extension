@@ -1,17 +1,15 @@
-import BrowserMessagingClient from "../services/messenger/messagingClient";
+import MessagingService from "../services/messagingService/messagingService";
 
 export default abstract class Page {
   static path: string;
   protected debugMode: boolean;
 
   constructor() {
-    const messageListener = new BrowserMessagingClient();
-
-    messageListener.listenForMessage("set-debug-mode", () => {
+    MessagingService.listen("set-debug-mode", () => {
       this.debugMode = true;
     });
 
-    messageListener.listenForMessage("unset-debug-mode", () => {
+    MessagingService.listen("unset-debug-mode", () => {
       this.debugMode = false;
     });
   }

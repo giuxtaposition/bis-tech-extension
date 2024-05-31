@@ -61,6 +61,7 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "vite": "~4.3.3",
+    "vite-plugin-checker": "^0.6.4",
     "vitest": "^1.0.4",
     "vitest-dom": "^0.1.1",
     "web-ext": "^7.6.2"

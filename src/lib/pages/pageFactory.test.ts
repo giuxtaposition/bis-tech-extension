@@ -1,4 +1,3 @@
-import BrowserMessagingClient from "../services/messenger/messagingClient";
 import InjuryCheckoutPage from "./injury/checkoutPage";
 import ContractorPage from "./injury/contractorPage";
 import SelectPage from "./injury/selectPage";
@@ -16,17 +15,6 @@ import OldPersonalDataPage from "./old-life/personalDataPage";
 import OldPreventivatorePage from "./old-life/preventivatorePage";
 import OldYourOfferPage from "./old-life/yourOfferPage";
 import PageFactory from "./pageFactory";
-
-vi.mock("../services/messenger/messagingClient", () => {
-  return {
-    __esModule: true,
-    default: vi.fn().mockImplementation(() => {
-      return {
-        listenForMessage: vi.fn(),
-      };
-    }),
-  };
-});
 
 describe("PageFactory tests", () => {
   it("should return correct page from product and path", () => {

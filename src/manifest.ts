@@ -95,7 +95,7 @@ export function getManifest(
       ...manifest,
       ...ManifestV3,
       manifest_version: manifestVersion,
-    };
+    } as chrome.runtime.ManifestV3;
   }
 
   throw new Error(
