@@ -51,7 +51,7 @@ export default abstract class Page {
     const inputEvent = new Event("input", { bubbles: true });
     input.dispatchEvent(inputEvent);
 
-    const blurEvent = new Event("blur", { bubbles: true });
+    const blurEvent = new Event("focusout", { bubbles: true });
     input.dispatchEvent(blurEvent);
 
     if (this.debugMode) {
