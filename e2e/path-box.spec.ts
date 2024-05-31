@@ -1,3 +1,4 @@
+import { type Page } from "@playwright/test";
 import { test, expect } from "./fixtures";
 
 test.describe("PathBox", () => {
@@ -20,18 +21,16 @@ test.describe("PathBox", () => {
       context,
       extensionId,
     }) => {
-      const extensionPage = await context.newPage();
-      await page.goto(`https://calc-dev.vitesicure.it/${path}`);
+      await page.goto(
+        `https://calc-dev.vitesicure.it/${
+          path === "caso-morte" ? "caso-morte?no-redirect=true" : path
+        }`,
+      );
 
       await page.waitForLoadState("networkidle");
 
-      await extensionPage.goto(
-        `chrome-extension://${extensionId}/src/entries/popup/index.html`,
-      );
+      await fillAndGoToNextPage(page, path);
 
-      await extensionPage.getByText("Autofill and go to next page").dblclick();
-
-      await page.bringToFront();
       await page.waitForURL(/.*(la-tua-offerta)|(la-tua-polizza-infortuni)$/);
 
       await expect(page.locator("#vitesicure-path-box #path-box")).toHaveText(
@@ -43,3 +42,25 @@ test.describe("PathBox", () => {
     });
   }
 });
+
+async function fillAndGoToNextPage(page: Page, path: string) {
+  switch (path) {
+    case "vita":
+      await page.fill("input[name='birthDate']", "26/03/1997");
+      await page.click("input[name='privacyPolicyAccepted']");
+      await page.click("button[data-testid='calculate-offer-button']");
+      break;
+    case "caso-morte":
+      await page.fill("input[name='customerInfo.birthDate']", "26/03/1997");
+      await page.click("input[name='agreements.privacyPolicy']");
+      await page.click("button[data-testid='calculate-quote-button']");
+      break;
+    case "infortuni":
+      await page.click("div[data-testid='injury-select-me']");
+      const continueButton = page.locator("button", {
+        hasText: "Continua",
+      });
+      await continueButton.click();
+      break;
+  }
+}
