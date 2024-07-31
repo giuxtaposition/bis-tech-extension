@@ -6,7 +6,7 @@ const sharedManifest: Partial<chrome.runtime.ManifestBase> = {
     {
       js: ["src/entries/contentScript/primary/main.ts"],
       matches: [
-        "http://localhost:3000/*",
+        "http://localhost/*",
         "http://calc-local.vitesicure.it/*",
         "https://calc-dev.vitesicure.it/*",
         "https://calc-staging.vitesicure.it/*",
