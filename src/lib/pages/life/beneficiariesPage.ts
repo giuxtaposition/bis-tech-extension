@@ -68,7 +68,7 @@ export default class BeneficiariesPage extends Page {
 
     if (this.isNamedBeneficiaryLegalPersonDialogOpen()) {
       this.changeInputValue(this.businessName, "Pinco Pallino SRL");
-      this.changeInputValue(this.vatNumber, "01234567890");
+      this.changeInputValue(this.vatNumber, "34926370544");
       this.changeInputValue(this.atecoCode, "81.21");
       this.changeInputValue(this.businessPhone, FakeDataService.phone());
       this.changeInputValue(this.businessEmail, FakeDataService.email());
