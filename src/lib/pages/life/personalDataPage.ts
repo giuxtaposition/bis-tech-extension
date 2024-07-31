@@ -6,7 +6,6 @@ export default class PersonalDataPage extends Page {
 
   private birthCity = "input[name='insured.cityOfBirth']";
   private gender = "input[name='insured.gender']";
-  private fiscalCode = '//input[@name="insured.fiscalCode"]/..//button';
 
   private job = "input[name='insured.profession']";
   private maritalStatus = "input[name='insured.maritalStatus']";
@@ -25,7 +24,6 @@ export default class PersonalDataPage extends Page {
   async autofill(): Promise<void> {
     this.changeInputValue(this.birthCity, FakeDataService.city());
     this.changeInputValue(this.gender, "MALE");
-    this.clickWithXpath(this.fiscalCode);
     this.changeInputValue(this.job, "LIVESTOCK_BREEDER");
     this.changeInputValue(this.maritalStatus, "SINGLE");
     this.changeInputValue(this.familyUnitType, "SINGLE");
