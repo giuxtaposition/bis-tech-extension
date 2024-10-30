@@ -2,7 +2,7 @@ import { type Page } from "@playwright/test";
 import { test, expect } from "./fixtures";
 
 test.describe("PathBox", () => {
-  const paths = ["vita", "caso-morte", "infortuni"];
+  const paths = ["vita", "infortuni"];
 
   for (const path of paths) {
     test(`in /${path} path, should render path box`, async ({ page }) => {
@@ -21,11 +21,7 @@ test.describe("PathBox", () => {
       context,
       extensionId,
     }) => {
-      await page.goto(
-        `https://calc-dev.vitesicure.it/${
-          path === "caso-morte" ? "caso-morte?no-redirect=true" : path
-        }`,
-      );
+      await page.goto(`https://calc-dev.vitesicure.it/${path}`);
 
       await page.waitForLoadState("networkidle");
 
@@ -49,11 +45,6 @@ async function fillAndGoToNextPage(page: Page, path: string) {
       await page.fill("input[name='birthDate']", "26/03/1997");
       await page.click("input[name='privacyPolicyAccepted']");
       await page.click("button[data-testid='calculate-offer-button']");
-      break;
-    case "caso-morte":
-      await page.fill("input[name='customerInfo.birthDate']", "26/03/1997");
-      await page.click("input[name='agreements.privacyPolicy']");
-      await page.click("button[data-testid='calculate-quote-button']");
       break;
     case "infortuni":
       await page.click("div[data-testid='injury-select-me']");

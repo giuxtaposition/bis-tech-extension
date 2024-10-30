@@ -1,5 +1,4 @@
 export enum Product {
-  SquareLife = "caso-morte",
-  NetLife = "vita",
+  Life = "vita",
   Injury = "infortuni",
 }

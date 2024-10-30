@@ -8,12 +8,6 @@ import HealthStatusPage from "./life/healthStatusPage";
 import PersonalDataPage from "./life/personalDataPage";
 import PreventivatorePage from "./life/preventivatorePage";
 import YourOfferPage from "./life/yourOfferPage";
-import OldBeneficiariesPage from "./old-life/beneficiariesPage";
-import OldCheckoutPage from "./old-life/checkoutPage";
-import OldHealthStatusPage from "./old-life/healthStatusPage";
-import OldPersonalDataPage from "./old-life/personalDataPage";
-import OldPreventivatorePage from "./old-life/preventivatorePage";
-import OldYourOfferPage from "./old-life/yourOfferPage";
 import type Page from "./page";
 
 export default class PageFactory {
@@ -27,17 +21,6 @@ export default class PageFactory {
         [BeneficiariesPage.path, new BeneficiariesPage()],
         [PersonalDataPage.path, new PersonalDataPage()],
         [CheckoutPage.path, new CheckoutPage()],
-      ]),
-    ],
-    [
-      "caso-morte",
-      new Map<string, Page>([
-        [OldPreventivatorePage.path, new OldPreventivatorePage()],
-        [OldYourOfferPage.path, new OldYourOfferPage()],
-        [OldHealthStatusPage.path, new OldHealthStatusPage()],
-        [OldBeneficiariesPage.path, new OldBeneficiariesPage()],
-        [OldPersonalDataPage.path, new OldPersonalDataPage()],
-        [OldCheckoutPage.path, new OldCheckoutPage()],
       ]),
     ],
     [

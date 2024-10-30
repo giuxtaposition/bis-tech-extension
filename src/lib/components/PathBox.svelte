@@ -29,11 +29,6 @@
     border-color: #d2527f;
     color: #d2527f;
   }
-  .caso-morte {
-    background: rgba(39, 174, 96, 0.1);
-    border-color: #27ae60;
-    color: #27ae60;
-  }
   .infortuni {
     background: rgba(34, 167, 240, 0.1);
     border-color: #22a7f0;

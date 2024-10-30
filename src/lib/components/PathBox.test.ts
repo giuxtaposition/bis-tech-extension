@@ -17,12 +17,8 @@ describe("PathBox", () => {
 
   test.each([
     {
-      currentPath: Product.NetLife,
+      currentPath: Product.Life,
       style: "background: rgb(252 165 165); color: rgb(185 28 28);",
-    },
-    {
-      currentPath: Product.SquareLife,
-      style: "background: rgb(134 239 172); color: rgb(21 128 61);",
     },
     {
       currentPath: Product.Injury,
