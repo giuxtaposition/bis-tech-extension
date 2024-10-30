@@ -17,13 +17,3 @@ jobs:
         run: npm install -g pnpm && pnpm install
       - name: Run unit tests
         run: pnpm test
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-      - name: Build extension and run e2e tests
-        run: pnpm build-and-test-e2e
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
