@@ -6,7 +6,6 @@ import checker from "vite-plugin-checker";
 import path from "path";
 import { getManifest } from "./src/manifest";
 
-const isFirefox = process.env.EXTENSION === "firefox";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -22,7 +21,7 @@ export default defineConfig(({ mode }) => {
         ? null
         : webExtension({
             manifest: getManifest(Number(env.MANIFEST_VERSION)),
-            useDynamicUrlWebAccessibleResources: isFirefox ? false : true,
+            useDynamicUrlWebAccessibleResources: false,
           }),
     ],
     resolve: {
