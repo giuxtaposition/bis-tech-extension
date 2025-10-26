@@ -62,8 +62,10 @@ export default class BeneficiariesPage extends Page {
         this.beneficiariesType,
         "LEGITIMATE_AND_TESTAMENTARY_HEIRS",
       );
+        if (!this.getInput(this.capitalToBeneficiaries).checked)
       this.clickInputElement(this.capitalToBeneficiaries);
-      this.clickInputElement(this.insuranceIsNotSavings);
+      if (!this.getInput(this.insuranceIsNotSavings).checked)
+        this.clickInputElement(this.insuranceIsNotSavings);
     }
 
     if (this.isNamedBeneficiaryLegalPersonDialogOpen()) {
