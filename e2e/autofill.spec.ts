@@ -1,5 +1,5 @@
 import { test } from "./fixtures";
-import { LIFE_PAGES } from "../src/lib/pages/constants";
+import { pagesPath } from "../src/lib/pages/paths";
 
 test.describe("Autofill", () => {
   test(`in /vita path, when user goes to the next page, should still render path box`, async ({
@@ -20,23 +20,23 @@ test.describe("Autofill", () => {
     await extensionPage.getByText("Autofill and go to next page").dblclick();
 
     await page.bringToFront();
-    await page.waitForURL(`**/${LIFE_PAGES.YOUR_OFFER}**`);
+    await page.waitForURL(`**/${pagesPath.life.yourOffer}**`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${LIFE_PAGES.HEALTH_STATUS}`);
+    await page.waitForURL(`**/${pagesPath.life.health}`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${LIFE_PAGES.BENEFICIARIES}`, { timeout: 50000 });
+    await page.waitForURL(`**/${pagesPath.life.beneficiaries}`, { timeout: 50000 });
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${LIFE_PAGES.PERSONAL_DATA}`);
+    await page.waitForURL(`**/${pagesPath.life.personalData}`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${LIFE_PAGES.CHECKOUT}`);
+    await page.waitForURL(`**/${pagesPath.life.checkout}`);
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
     await page.waitForURL(`**/grazie**`, { timeout: 30000 });

@@ -1,9 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
-import { LIFE_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class PersonalDataPage extends Page {
-  public static path: string = LIFE_PAGES.PERSONAL_DATA;
+  public static path: string = pagesPath.life.personalData;
 
   // Insured
   private insuredName = "input[name$='insured.name']";

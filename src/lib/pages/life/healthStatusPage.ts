@@ -1,8 +1,8 @@
 import Page from "../page";
-import { LIFE_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class HealthStatusPage extends Page {
-  public static path: string = LIFE_PAGES.HEALTH_STATUS;
+  public static path: string = pagesPath.life.health;
 
   private height = 'input[name="height"]';
   private weight = 'input[name="weight"]';

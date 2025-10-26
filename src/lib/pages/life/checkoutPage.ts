@@ -1,9 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
-import { LIFE_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class CheckoutPage extends Page {
-  public static path: string = LIFE_PAGES.CHECKOUT;
+  public static path: string = pagesPath.life.checkout;
 
   private insuredDocumentType = "input[name='insured.document.type']";
   private insuredDocumentCode = "input[name='insured.document.code']";

@@ -1,9 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
-import { INJURY_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class YourOfferPage extends Page {
-  public static path: string = INJURY_PAGES.YOUR_OFFER;
+  public static path: string = pagesPath.injury.yourOffer
 
   private birthDate = "input[name='data.insuredList[0].birthDate']";
   private name = "input[name='contractor.firstName']";

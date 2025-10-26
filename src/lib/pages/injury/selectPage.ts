@@ -1,8 +1,8 @@
 import Page from "../page";
-import { INJURY_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class SelectPage extends Page {
-  public static path: string = INJURY_PAGES.SELECT;
+  public static path: string = pagesPath.injury.select;
 
   private protectMe = "div[data-testid='injury-select-me']";
 

@@ -1,9 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
-import { INJURY_PAGES } from "../constants";
+import { pagesPath } from "../paths";
 
 export default class ContractorPage extends Page {
-  public static path: string = INJURY_PAGES.CONTRACTOR;
+  public static path: string = pagesPath.injury.contractor;
 
   private birthCity = "input[name='contractor.birthCity']";
   private gender = "input[name='contractor.gender']";
