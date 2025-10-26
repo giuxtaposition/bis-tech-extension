@@ -1,9 +1,5 @@
 import { test } from "./fixtures";
-import YourOfferPage from "../src/lib/pages/life/yourOfferPage";
-import HealthStatusPage from "../src/lib/pages/life/healthStatusPage";
-import BeneficiariesPage from "../src/lib/pages/life/beneficiariesPage";
-import PersonalDataPage from "../src/lib/pages/life/personalDataPage";
-import CheckoutPage from "../src/lib/pages/life/checkoutPage";
+import { LIFE_PAGES } from "../src/lib/pages/constants";
 
 test.describe("Autofill", () => {
   test(`in /vita path, when user goes to the next page, should still render path box`, async ({
@@ -24,23 +20,23 @@ test.describe("Autofill", () => {
     await extensionPage.getByText("Autofill and go to next page").dblclick();
 
     await page.bringToFront();
-    await page.waitForURL(`**/${YourOfferPage.path}**`);
+    await page.waitForURL(`**/${LIFE_PAGES.YOUR_OFFER}**`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${HealthStatusPage.path}`);
+    await page.waitForURL(`**/${LIFE_PAGES.HEALTH_STATUS}`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${BeneficiariesPage.path}`, { timeout: 50000 });
+    await page.waitForURL(`**/${LIFE_PAGES.BENEFICIARIES}`, { timeout: 50000 });
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${PersonalDataPage.path}`);
+    await page.waitForURL(`**/${LIFE_PAGES.PERSONAL_DATA}`);
 
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
-    await page.waitForURL(`**/${CheckoutPage.path}`);
+    await page.waitForURL(`**/${LIFE_PAGES.CHECKOUT}`);
     await page.waitForTimeout(1000);
     await extensionPage.getByText("Autofill and go to next page").dblclick();
     await page.waitForURL(`**/grazie**`, { timeout: 30000 });

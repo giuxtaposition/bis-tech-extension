@@ -1,8 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
+import { LIFE_PAGES } from "../constants";
 
 export default class YourOfferPage extends Page {
-  public static path: string = "la-tua-offerta";
+  public static path: string = LIFE_PAGES.YOUR_OFFER;
 
   private name = "input[name='contacts.name']";
   private surname = "input[name='contacts.surname']";

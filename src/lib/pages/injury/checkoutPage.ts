@@ -1,8 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
+import { INJURY_PAGES } from "../constants";
 
 export default class CheckoutPage extends Page {
-  public static path: string = "checkout";
+  public static path: string = INJURY_PAGES.CHECKOUT;
 
   private documentType = "input[name='contractor.document.type']";
   private documentCode = "input[name='contractor.document.code']";

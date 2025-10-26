@@ -1,8 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
+import { LIFE_PAGES } from "../constants";
 
 export default class PreventivatorePage extends Page {
-  public static path: string = "preventivatore";
+  public static path: string = LIFE_PAGES.PREVENTIVATORE;
 
   private duration =
     "[data-testid='duration-slider'] [data-testid='slider.bar'] [data-index='2'][aria-hidden=true]";
