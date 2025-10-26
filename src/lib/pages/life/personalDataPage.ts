@@ -12,6 +12,7 @@ export default class PersonalDataPage extends Page {
   private insuredBirthCity = "input[name='insured.cityOfBirth']";
   private insuredGender = "input[name='insured.gender']";
   private insuredJob = "input[name='insured.profession']";
+  private insuredOccupationType = "input[name='insured.economicActivityType']";
   private insuredMaritalStatus = "input[name='insured.maritalStatus']";
   private insuredFamilyUnitType = "input[name='insured.familyUnitType']";
   private insuredIsPoliticallExposed =
@@ -77,6 +78,7 @@ export default class PersonalDataPage extends Page {
     this.changeInputValue(this.insuredBirthCity, FakeDataService.city());
     this.changeInputValue(this.insuredGender, "MALE");
     this.changeInputValue(this.insuredJob, "LIVESTOCK_BREEDER");
+    this.changeInputValue(this.insuredOccupationType, "PRIVATE_SECTOR_PERMANENT_EMPLOYEE")
     this.changeInputValue(this.insuredMaritalStatus, "SINGLE");
     this.changeInputValue(this.insuredFamilyUnitType, "SINGLE");
     this.clickWithXpath(this.insuredIsPoliticallExposed);
