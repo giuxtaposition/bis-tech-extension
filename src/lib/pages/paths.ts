@@ -1,5 +1,11 @@
-type LifePage = 'preventivatore' | 'yourOffer' | 'health' | 'beneficiaries'| 'personalData'| 'checkout';
-type InjuryPage = 'select' | 'yourOffer' | 'contractor'| 'checkout';
+type LifePage =
+  | "preventivatore"
+  | "yourOffer"
+  | "health"
+  | "beneficiaries"
+  | "personalData"
+  | "checkout";
+type InjuryPage = "select" | "yourOffer" | "policyHolder" | "checkout";
 
 const pagesPath = {
   life: {
@@ -13,9 +19,10 @@ const pagesPath = {
   injury: {
     select: "seleziona",
     yourOffer: "la-tua-polizza-infortuni",
-    contractor: "contraente",
+    policyHolder: "contraente",
     checkout: "checkout",
   } satisfies Record<InjuryPage, string>,
 } as const;
 
 export { pagesPath };
+

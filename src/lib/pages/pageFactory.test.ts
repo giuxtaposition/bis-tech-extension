@@ -1,5 +1,5 @@
 import InjuryCheckoutPage from "./injury/checkoutPage";
-import ContractorPage from "./injury/contractorPage";
+import PolicyHolderPage from "./injury/policyHolderPage";
 import SelectPage from "./injury/selectPage";
 import InjuryYourOfferPage from "./injury/yourOfferPage";
 import BeneficiariesPage from "./life/beneficiariesPage";
@@ -38,7 +38,7 @@ describe("PageFactory tests", () => {
       PageFactory.getPage("infortuni", "la-tua-polizza-infortuni"),
     ).toBeInstanceOf(InjuryYourOfferPage);
     expect(PageFactory.getPage("infortuni", "contraente")).toBeInstanceOf(
-      ContractorPage,
+      PolicyHolderPage,
     );
     expect(PageFactory.getPage("infortuni", "checkout")).toBeInstanceOf(
       InjuryCheckoutPage,

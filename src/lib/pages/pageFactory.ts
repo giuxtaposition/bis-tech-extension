@@ -1,5 +1,5 @@
 import InjuryCheckoutPage from "./injury/checkoutPage";
-import ContractorPage from "./injury/contractorPage";
+import PolicyHolderPage from "./injury/policyHolderPage";
 import SelectPage from "./injury/selectPage";
 import InjuryYourOfferPage from "./injury/yourOfferPage";
 import BeneficiariesPage from "./life/beneficiariesPage";
@@ -28,7 +28,7 @@ export default class PageFactory {
       new Map<string, Page>([
         [SelectPage.path, new SelectPage()],
         [InjuryYourOfferPage.path, new InjuryYourOfferPage()],
-        [ContractorPage.path, new ContractorPage()],
+        [PolicyHolderPage.path, new PolicyHolderPage()],
         [InjuryCheckoutPage.path, new InjuryCheckoutPage()],
       ]),
     ],

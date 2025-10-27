@@ -2,8 +2,8 @@ import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
 import { pagesPath } from "../paths";
 
-export default class ContractorPage extends Page {
-  public static path: string = pagesPath.injury.contractor;
+export default class PolicyHolderPage extends Page {
+  public static path: string = pagesPath.injury.policyHolder;
 
   private birthCity = "input[name='contractor.birthCity']";
   private gender = "input[name='contractor.gender']";
@@ -12,6 +12,8 @@ export default class ContractorPage extends Page {
   private maritalStatus = "input[name='contractor.maritalStatus']";
   private familyUnitType = "input[name='contractor.familyUnitType']";
   private questions = "div[data-testid] button:nth-child(2)";
+  private policyHolderSameAsInsured =
+    "//*[text()[contains(.,'Il Contraente della Polizza')]]/../../..//button[1]";
   private confirmProtection =
     "//*[text()[contains(.,'Confermi di voler proteggere te stesso')]]/../../..//button[1]";
 
@@ -39,6 +41,9 @@ export default class ContractorPage extends Page {
     });
     await this.withDelay(() => {
       this.clickWithXpath(this.confirmProtection);
+    });
+    await this.withDelay(() => {
+      this.clickWithXpath(this.policyHolderSameAsInsured);
     });
     await this.withDelay(() => {
       this.changeInputValue(this.maritalStatus, "SINGLE");
