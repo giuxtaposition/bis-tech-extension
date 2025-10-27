@@ -16,6 +16,7 @@ export default class YourOfferPage extends Page {
     this.changeInputValue(this.surname, FakeDataService.lastName());
     this.changeInputValue(this.email, FakeDataService.email());
     this.changeInputValue(this.phone, FakeDataService.phone());
-    this.clickInputElement(this.privacyPolicy);
+    if (!this.getInput(this.privacyPolicy).checked)
+      this.clickInputElement(this.privacyPolicy);
   }
 }
