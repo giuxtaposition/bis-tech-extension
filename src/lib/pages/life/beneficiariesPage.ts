@@ -1,8 +1,9 @@
 import FakeDataService from "../../services/fakeDataService";
 import Page from "../page";
+import { pagesPath } from "../paths";
 
 export default class BeneficiariesPage extends Page {
-  public static path: string = "beneficiari";
+  public static path: string = pagesPath.life.beneficiaries;
 
   private beneficiariesType = "input[name='beneficiaries.beneficiariesType']";
   private capitalToBeneficiaries =
