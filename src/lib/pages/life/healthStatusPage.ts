@@ -12,7 +12,8 @@ export default class HealthStatusPage extends Page {
   async autofill(): Promise<void> {
     this.changeInputValue(this.height, "170");
     this.changeInputValue(this.weight, "80");
-    this.clickInputElement(this.privacyPolicy);
+    if (!this.getInput(this.privacyPolicy).checked)
+      this.clickInputElement(this.privacyPolicy);
     this.clickMultiples(this.questions);
   }
 }

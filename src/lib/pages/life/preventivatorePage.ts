@@ -16,7 +16,8 @@ export default class PreventivatorePage extends Page {
   async autofill(): Promise<void> {
     this.changeInputValue(this.birthDate, FakeDataService.birthdate(74));
     this.clickInputElement(this.smoker);
-    this.clickInputElement(this.privacyPolicy);
+    if (!this.getInput(this.privacyPolicy).checked)
+      this.clickInputElement(this.privacyPolicy);
     this.clickInputElement(this.duration);
     this.clickInputElement(this.capital);
   }
