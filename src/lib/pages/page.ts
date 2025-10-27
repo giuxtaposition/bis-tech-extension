@@ -98,7 +98,17 @@ export default abstract class Page {
 
   public goToNextPage() {
     const allButtons = document.querySelectorAll<HTMLButtonElement>("button");
-    const lastButton = allButtons[allButtons.length - 1];
-    this.simulateMouseClick(lastButton);
+    for (const button of allButtons) {
+      const buttonText = button.innerText.toLowerCase();
+      if (
+        buttonText.includes("continua") ||
+        buttonText.includes("calcola preventivo") ||
+        buttonText.includes("salva preventivo") ||
+        buttonText.includes("ottieni la tua polizza")
+      ) {
+        this.simulateMouseClick(button);
+        return;
+      }
+    }
   }
 }
