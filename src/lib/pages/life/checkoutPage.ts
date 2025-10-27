@@ -34,6 +34,7 @@ export default class CheckoutPage extends Page {
     "//div[@data-testid='question-wantsToDoMedicalExam']//button[2]";
 
   private iban = "input[name='payment.iban']";
+  private sourceOfFounds = "input[name='payment.sourceOfFunds']";
 
   private isAccountHolder =
     "//div[@data-testid='question-payment.isAccountHolder']//button";
@@ -41,6 +42,8 @@ export default class CheckoutPage extends Page {
     "//div[@data-testid='question-compliance.dataTruthfulness']//button";
   private termsAndConditions =
     "//div[@data-testid='question-compliance.termsAndConditions']//button";
+  private understandLimitationsAndExclusions =
+    "//div[@data-testid='question-compliance.understandLimitationsAndExclusions']//button";
   private privacyPolicyExtended =
     "//div[@data-testid='question-privacyPolicyExtended']//button";
   private otherPolicies =
@@ -60,9 +63,11 @@ export default class CheckoutPage extends Page {
     this.changeInputValue(this.insuredDocumentReleaseAuthority, "PREFECTURE");
     this.clickWithXpath(this.medicalExams);
     this.changeInputValue(this.iban, "IT87D0300203280616976634975");
+    this.changeInputValue(this.sourceOfFounds, "EMPLOYMENT_INCOME")
     this.clickWithXpath(this.isAccountHolder);
     this.clickWithXpath(this.dataTruthfulness);
     this.clickWithXpath(this.termsAndConditions);
+    this.clickWithXpath(this.understandLimitationsAndExclusions);
     this.clickWithXpath(this.privacyPolicyExtended);
     this.clickWithXpath(this.otherPolicies);
     this.clickWithXpath(this.confirmObligations);
