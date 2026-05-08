@@ -50,7 +50,7 @@ export default abstract class Page {
   ];
 
   static path: string;
-  protected debugMode: boolean;
+  protected debugMode = false;
 
   constructor() {
     MessagingService.listen("set-debug-mode", () => {
@@ -100,8 +100,8 @@ export default abstract class Page {
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
       "value",
-    ).set;
-    nativeInputValueSetter.call(input, value);
+    )?.set;
+    nativeInputValueSetter?.call(input, value);
     input.dispatchEvent(new Event("input", { bubbles: true }));
     input.dispatchEvent(new Event("focusout", { bubbles: true }));
     if (this.debugMode) {

@@ -20,9 +20,9 @@ export default class BeneficiariesPage extends Page {
   async autofill(): Promise<void> {
     if (!this.isNamedBeneficiaryLegalPersonDialogOpen()) {
       this.changeInputValue(this.beneficiariesType, "LEGITIMATE_AND_TESTAMENTARY_HEIRS");
-      if (!this.getInput(this.capitalToBeneficiaries).checked)
+      if (!this.getInput(this.capitalToBeneficiaries)?.checked)
         this.clickInputElement(this.capitalToBeneficiaries);
-      if (!this.getInput(this.insuranceIsNotSavings).checked)
+      if (!this.getInput(this.insuranceIsNotSavings)?.checked)
         this.clickInputElement(this.insuranceIsNotSavings);
     }
 

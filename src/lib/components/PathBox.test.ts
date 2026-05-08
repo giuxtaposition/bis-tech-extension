@@ -12,7 +12,7 @@ describe("PathBox", () => {
   test("if currentPath undefined does not show anything", () => {
     const { container } = render(PathBox);
 
-    expect(container.innerHTML).toBe("<!--<PathBox>-->");
+    expect(container.innerHTML).toBe("<!---->");
   });
 
   test.each([

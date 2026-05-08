@@ -25,6 +25,7 @@ export default defineConfig(({ mode }) => {
           }),
     ],
     resolve: {
+      conditions: ["browser"],
       alias: {
         "~": path.resolve(__dirname, "./src"),
         ...(process.env.ENVIRONMENT === "test" && {

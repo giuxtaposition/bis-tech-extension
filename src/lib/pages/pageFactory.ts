@@ -30,6 +30,10 @@ const lifeConfigs: PageConfig[] = [
         type: "checkbox",
         selector: "input[name='contacts.privacyPolicyAccepted']",
       },
+      {
+        type: "clickMultiples",
+        selector: "div[data-testid] button:nth-child(2)",
+      },
     ],
   },
   {
@@ -158,6 +162,6 @@ export default class PageFactory {
   ]);
 
   static getPage(product: string, path: string) {
-    return this.pageMap.get(product).get(path);
+    return this.pageMap.get(product)?.get(path);
   }
 }

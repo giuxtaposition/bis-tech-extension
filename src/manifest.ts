@@ -90,7 +90,7 @@ export function getManifest(
       ...manifest,
       ...ManifestV2,
       manifest_version: manifestVersion,
-    };
+    } as chrome.runtime.ManifestV2;
   }
 
   if (manifestVersion === 3) {

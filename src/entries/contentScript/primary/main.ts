@@ -1,3 +1,4 @@
+import { mount } from "svelte";
 import PathBoxComponent from "../../../lib/components/PathBox.svelte";
 import { waitForElement } from "../../../lib/utils/waitForElement";
 import prepareComponent from "../renderContent";
@@ -19,7 +20,7 @@ new MutationObserver(() => {
 async function loadPathBox() {
   if (await storage.get("showPathBox")) {
     const pathBox = await prepareComponent((appRoot) => {
-      new PathBoxComponent({
+      mount(PathBoxComponent, {
         target: appRoot,
         props: {
           currentPath: window.location.pathname.split("/")[1],
@@ -28,6 +29,7 @@ async function loadPathBox() {
     });
 
     Promise.any([waitForElement("#root")]).then((root) => {
+      if (!root) return;
       if (root.querySelector("#vitesicure-path-box")) return;
       root.appendChild(pathBox);
     });
@@ -43,6 +45,7 @@ MessagingService.listen("auto-fill", async (content) => {
 
   const path = isOtherPage ? isOtherPage : isPreventivatorePage;
   const page = PageFactory.getPage(product, path);
+  if (!page) return;
   await page.autofill();
 
   if (goToNextPage) {

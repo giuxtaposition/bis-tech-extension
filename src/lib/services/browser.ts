@@ -17,7 +17,7 @@ export const listenForMessage = (
   message: string,
   callback: (content: any) => void,
 ) => {
-  browser.runtime.onMessage.addListener((listenerMessage) => {
+  browser.runtime.onMessage.addListener((listenerMessage: any) => {
     if (listenerMessage.message === message) {
       callback(listenerMessage.content);
     }
