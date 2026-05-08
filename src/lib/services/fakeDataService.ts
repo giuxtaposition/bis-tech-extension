@@ -23,7 +23,6 @@ class FakeDataService {
     "Prato",
     "Modena",
     "Reggio",
-    "Reggio",
     "Perugia",
     "Ravenna",
     "Livorno",
@@ -62,16 +61,8 @@ class FakeDataService {
     });
 
     const year = date.getUTCFullYear();
-    let month: number | string = date.getUTCMonth() + 1;
-    let day: number | string = date.getUTCDate();
-
-    if (day < 10) {
-      day = "0" + day;
-    }
-
-    if (month < 10) {
-      month = "0" + month;
-    }
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
 
     return `${day}/${month}/${year}`;
   }
@@ -101,12 +92,7 @@ class FakeDataService {
   }
 
   public static city() {
-    return this.randomItemFrom(this.cities);
-  }
-
-  private static randomItemFrom(array: any[]) {
-    const index = Math.floor(Math.random() * array.length);
-    return array[index];
+    return faker.helpers.arrayElement(this.cities);
   }
 }
 

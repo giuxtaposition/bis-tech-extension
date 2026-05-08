@@ -7,33 +7,31 @@
 
   const storage = OptionsSyncStorage.getInstance();
 
-  let showPathBox = true;
-  let debugMode = false;
+  let showPathBox = $state(true);
+  let debugMode = $state(false);
 
   onMount(async () => {
     showPathBox = await storage.get("showPathBox");
     debugMode = await storage.get("debugMode");
   });
 
-  $: saveShowPathBox = async function () {
-    storage.set("showPathBox", showPathBox);
-  };
+  const saveShowPathBox = () => storage.set("showPathBox", showPathBox);
+  const saveDebugMode = () => storage.set("debugMode", debugMode);
 
-  $: saveDebugMode = async function () {
-    storage.set("debugMode", debugMode);
-  };
+  $effect(() => {
+    MessagingService.send(debugMode ? "set-debug-mode" : "unset-debug-mode");
+  });
 
-  $: MessagingService.send(debugMode ? "set-debug-mode" : "unset-debug-mode");
-  $: MessagingService.send(showPathBox ? "load-path-box" : "remove-path-box");
+  $effect(() => {
+    MessagingService.send(showPathBox ? "load-path-box" : "remove-path-box");
+  });
 
   const autofill = async () => {
     await MessagingService.send("auto-fill");
   };
 
   const autofillAndGoToNextPage = async () => {
-    await MessagingService.send("auto-fill", {
-      goToNextPage: true,
-    });
+    await MessagingService.send("auto-fill", { goToNextPage: true });
   };
 </script>
 

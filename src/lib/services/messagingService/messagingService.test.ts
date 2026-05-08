@@ -5,16 +5,12 @@ describe("MessagingService", () => {
   const browserSendMessage = vi.spyOn(browser, "sendMessage");
 
   it("sendMessage should send message to current tab", async () => {
-    MessagingService.send("messageTest", {
-      myContent: "test",
-    });
+    MessagingService.send("auto-fill", { goToNextPage: true });
 
     await vi.waitFor(() => {
       expect(browserSendMessage).toHaveBeenCalledWith(
-        "messageTest",
-        {
-          myContent: "test",
-        },
+        "auto-fill",
+        { goToNextPage: true },
         1,
       );
     });

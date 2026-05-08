@@ -4,6 +4,7 @@ import CheckoutPage from "./life/checkoutPage";
 import PersonalDataPage from "./life/personalDataPage";
 import type Page from "./page";
 import { pagesPath } from "./paths";
+import { Product } from "../../types";
 
 const lifeConfigs: PageConfig[] = [
   {
@@ -147,7 +148,7 @@ const toEntries = (configs: PageConfig[]): [string, Page][] =>
 export default class PageFactory {
   private static readonly pageMap = new Map<string, Map<string, Page>>([
     [
-      "vita",
+      Product.Life,
       new Map<string, Page>([
         ...toEntries(lifeConfigs),
         [BeneficiariesPage.path, new BeneficiariesPage()],
@@ -156,7 +157,7 @@ export default class PageFactory {
       ]),
     ],
     [
-      "infortuni",
+      Product.PersonalAccident,
       new Map<string, Page>([...toEntries(personalAccidentConfigs)]),
     ],
   ]);

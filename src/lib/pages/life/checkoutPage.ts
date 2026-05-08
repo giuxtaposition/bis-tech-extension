@@ -4,10 +4,6 @@ import { pagesPath } from "../paths";
 export default class CheckoutPage extends Page {
   public static path: string = pagesPath.life.checkout;
 
-  // used only for isPolicyHolderLegalPerson check
-  private policyHolderLegalPersonDocumentCode =
-    "input[name='policyHolder.legalRepresentative.document.code']";
-
   private medicalExams =
     "//div[@data-testid='question-wantsToDoMedicalExam']//button[2]";
   private isAccountHolder =
@@ -37,7 +33,4 @@ export default class CheckoutPage extends Page {
     this.clickWithXpath(this.confirmObligations);
   }
 
-  isPolicyHolderLegalPerson() {
-    return !!this.getInput(this.policyHolderLegalPersonDocumentCode);
-  }
 }

@@ -3,36 +3,20 @@ import BeneficiariesPage from "./life/beneficiariesPage";
 import CheckoutPage from "./life/checkoutPage";
 import PersonalDataPage from "./life/personalDataPage";
 import PageFactory from "./pageFactory";
+import { pagesPath } from "./paths";
+import { Product } from "../../types";
 
 describe("PageFactory tests", () => {
   it("should return correct page from product and path", () => {
-    expect(PageFactory.getPage("vita", "preventivatore")).toBeInstanceOf(
-      ConfigPage,
-    );
-    expect(PageFactory.getPage("vita", "la-tua-offerta")).toBeInstanceOf(
-      ConfigPage,
-    );
-    expect(PageFactory.getPage("vita", "stato-di-salute")).toBeInstanceOf(
-      ConfigPage,
-    );
-    expect(PageFactory.getPage("vita", "beneficiari")).toBeInstanceOf(
-      BeneficiariesPage,
-    );
-    expect(PageFactory.getPage("vita", "dati-personali")).toBeInstanceOf(
-      PersonalDataPage,
-    );
-    expect(PageFactory.getPage("vita", "checkout")).toBeInstanceOf(
-      CheckoutPage,
-    );
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.preventivatore)).toBeInstanceOf(ConfigPage);
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.yourOffer)).toBeInstanceOf(ConfigPage);
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.health)).toBeInstanceOf(ConfigPage);
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.beneficiaries)).toBeInstanceOf(BeneficiariesPage);
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.personalData)).toBeInstanceOf(PersonalDataPage);
+    expect(PageFactory.getPage(Product.Life, pagesPath.life.checkout)).toBeInstanceOf(CheckoutPage);
 
-    expect(
-      PageFactory.getPage("infortuni", "la-tua-polizza-infortuni"),
-    ).toBeInstanceOf(ConfigPage);
-    expect(PageFactory.getPage("infortuni", "contraente")).toBeInstanceOf(
-      ConfigPage,
-    );
-    expect(PageFactory.getPage("infortuni", "checkout")).toBeInstanceOf(
-      ConfigPage,
-    );
+    expect(PageFactory.getPage(Product.PersonalAccident, pagesPath.personalAccident.yourOffer)).toBeInstanceOf(ConfigPage);
+    expect(PageFactory.getPage(Product.PersonalAccident, pagesPath.personalAccident.policyHolder)).toBeInstanceOf(ConfigPage);
+    expect(PageFactory.getPage(Product.PersonalAccident, pagesPath.personalAccident.checkout)).toBeInstanceOf(ConfigPage);
   });
 });

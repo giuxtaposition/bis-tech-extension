@@ -18,18 +18,16 @@ export default class BeneficiariesPage extends Page {
   private businessName = "input[name$=businessName]";
 
   async autofill(): Promise<void> {
-    if (!this.isNamedBeneficiaryLegalPersonDialogOpen()) {
+    if (this.isNamedBeneficiaryLegalPersonDialogOpen()) {
+      this.smartAutofill();
+      this.clickWithXpath(this.legalRepresentativeIsPoliticallyExposed);
+      this.clickWithXpath(this.legalRepresentativeIsContactPerson);
+    } else {
       this.changeInputValue(this.beneficiariesType, "LEGITIMATE_AND_TESTAMENTARY_HEIRS");
       if (!this.getInput(this.capitalToBeneficiaries)?.checked)
         this.clickInputElement(this.capitalToBeneficiaries);
       if (!this.getInput(this.insuranceIsNotSavings)?.checked)
         this.clickInputElement(this.insuranceIsNotSavings);
-    }
-
-    if (this.isNamedBeneficiaryLegalPersonDialogOpen()) {
-      this.smartAutofill();
-      this.clickWithXpath(this.legalRepresentativeIsPoliticallyExposed);
-      this.clickWithXpath(this.legalRepresentativeIsContactPerson);
     }
   }
 

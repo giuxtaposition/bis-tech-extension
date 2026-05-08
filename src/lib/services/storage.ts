@@ -33,7 +33,9 @@ class OptionsSyncStorage implements IStorage {
     if (typeof item === "string") {
       try {
         item = JSON.parse(item);
-      } catch (error) {}
+      } catch {
+        // value is a plain string, not JSON — use as-is
+      }
     }
 
     return item;
