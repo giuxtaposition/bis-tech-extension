@@ -5,7 +5,11 @@ type LifePage =
   | "beneficiaries"
   | "personalData"
   | "checkout";
-type InjuryPage = "select" | "yourOffer" | "policyHolder" | "checkout";
+type PersonalAccidentPage =
+  | "select"
+  | "yourOffer"
+  | "policyHolder"
+  | "checkout";
 
 const pagesPath = {
   life: {
@@ -16,13 +20,12 @@ const pagesPath = {
     personalData: "dati-personali",
     checkout: "checkout",
   } satisfies Record<LifePage, string>,
-  injury: {
+  personalAccident: {
     select: "seleziona",
     yourOffer: "la-tua-polizza-infortuni",
     policyHolder: "contraente",
     checkout: "checkout",
-  } satisfies Record<InjuryPage, string>,
+  } satisfies Record<PersonalAccidentPage, string>,
 } as const;
 
 export { pagesPath };
-

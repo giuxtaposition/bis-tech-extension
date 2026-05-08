@@ -46,9 +46,9 @@ const lifeConfigs: PageConfig[] = [
   },
 ];
 
-const injuryConfigs: PageConfig[] = [
+const personalAccidentConfigs: PageConfig[] = [
   {
-    path: pagesPath.injury.yourOffer,
+    path: pagesPath.personalAccident.yourOffer,
     actions: [
       {
         type: "checkbox",
@@ -62,7 +62,7 @@ const injuryConfigs: PageConfig[] = [
     ],
   },
   {
-    path: pagesPath.injury.policyHolder,
+    path: pagesPath.personalAccident.policyHolder,
     actions: [
       {
         type: "xpathClick",
@@ -101,7 +101,7 @@ const injuryConfigs: PageConfig[] = [
     ],
   },
   {
-    path: pagesPath.injury.checkout,
+    path: pagesPath.personalAccident.checkout,
     actions: [
       {
         type: "click",
@@ -151,7 +151,10 @@ export default class PageFactory {
         [CheckoutPage.path, new CheckoutPage()],
       ]),
     ],
-    ["infortuni", new Map<string, Page>([...toEntries(injuryConfigs)])],
+    [
+      "infortuni",
+      new Map<string, Page>([...toEntries(personalAccidentConfigs)]),
+    ],
   ]);
 
   static getPage(product: string, path: string) {
