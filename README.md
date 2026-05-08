@@ -72,8 +72,6 @@ pnpm serve:firefox
 
 ```sh
 pnpm test # unit tests
-pnpm build-and-test-e2e # e2e tests, extension must be built first
-pnpm test:e2e # for when extension has been already built
 ```
 
 > [!NOTE]  
