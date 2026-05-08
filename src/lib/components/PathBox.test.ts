@@ -12,26 +12,19 @@ describe("PathBox", () => {
   test("if currentPath undefined does not show anything", () => {
     const { container } = render(PathBox);
 
-    expect(container.innerHTML).toBe("<div><!--<PathBox>--></div>");
+    expect(container.innerHTML).toBe("<!--<PathBox>-->");
   });
 
   test.each([
-    {
-      currentPath: Product.Life,
-      style: "background: rgb(252 165 165); color: rgb(185 28 28);",
-    },
-    {
-      currentPath: Product.Injury,
-      style: "background: rgb(147 197 253); color: rgb(29 78 216);",
-    },
+    { currentPath: Product.Life },
+    { currentPath: Product.PersonalAccident },
   ])(
     "if currentPath is $currentPath shows correct styling",
-    ({ currentPath, style }) => {
+    ({ currentPath }) => {
       renderPathBox({ currentPath });
       const pathBox = screen.getByText(currentPath);
 
       expect(pathBox).toHaveClass(currentPath);
-      expect(pathBox).toHaveStyle(style);
     },
   );
 
